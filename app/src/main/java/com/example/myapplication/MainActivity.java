@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +15,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -24,7 +29,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseFirestore mStore=FirebaseFirestore.getInstance();
 
     private RecyclerView mPostRecyclerView;
@@ -47,25 +51,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         mDatas=new ArrayList<>();
         mStore.collection(FirebaseID.post)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            if(task.getResult()!=null) {
-                                for (DocumentSnapshot snap : task.getResult()) {
-                                    Map<String,Object> shot=snap.getData();
-                                    String documentID=String.valueOf(shot.get(FirebaseID.documentID));
-                                    String title= String.valueOf(snap.get(FirebaseID.title));
-                                    String contents=String.valueOf(shot.get(FirebaseID.contents));
-                                    post data=new post(documentID,title,contents);
-                                    mDatas.add(data);
-                                }
-                                mAdapter=new postadapter(mDatas);
-                                mPostRecyclerView.setAdapter(mAdapter);
-
-                            }
-
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(value!=null){
+                            mDatas.clear();
+                        for(DocumentSnapshot snap: value.getDocuments()){
+                            Map<String,Object> shot=snap.getData();
+                            String documentID=String.valueOf(shot.get(FirebaseID.documentID));
+                            String nickname=String.valueOf(shot.get((FirebaseID.nickname)));
+                            String title= String.valueOf(snap.get(FirebaseID.title));
+                            String contents=String.valueOf(shot.get(FirebaseID.contents));
+                            post data=new post(documentID,nickname,title,contents);
+                            mDatas.add(data);
+                        }
+                            mAdapter=new postadapter(mDatas);
+                            mPostRecyclerView.setAdapter(mAdapter);
                         }
                     }
                 });

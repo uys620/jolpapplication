@@ -8,6 +8,15 @@
     android:gravity="center_vertical"
     tools:context=".signupActivity">
 
+
+    <EditText
+        android:id="@+id/sign_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_margin="8dp"
+        android:hint="Nickname"/>
+
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"

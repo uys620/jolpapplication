@@ -26,12 +26,14 @@ public class signupActivity extends AppCompatActivity implements View.OnClickLis
 
     private EditText eMailText;
     private EditText mPasswordText;
+    private EditText mNickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        mNickname=findViewById(R.id.sign_nickname);
         eMailText=findViewById(R.id.email);
         mPasswordText=findViewById(R.id.pass);
 
@@ -53,6 +55,7 @@ public class signupActivity extends AppCompatActivity implements View.OnClickLis
                            if(user!=null){
                             Map<String,Object> userMap=new HashMap<>();
                             userMap.put(FirebaseID.documentID,user.getUid());
+                            userMap.put(FirebaseID.nickname,mNickname.getText().toString());
                             userMap.put(FirebaseID.email,eMailText.getText().toString());
                             userMap.put(FirebaseID.password,mPasswordText.getText().toString());
                             mStore.collection(FirebaseID.user).document(user.getUid()).set(userMap, SetOptions.merge());
