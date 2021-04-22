@@ -50,23 +50,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         mDatas=new ArrayList<>();
-        mStore.collection(FirebaseID.post)
-                .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)
+        mStore.collection(FirebaseID.post)//파이어스토어에서 post로 되어있는 collectionreference 만들기
+                .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간순서대로 오름차순
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if(value!=null){
                             mDatas.clear();
-                        for(DocumentSnapshot snap: value.getDocuments()){
-                            Map<String,Object> shot=snap.getData();
-                            String documentID=String.valueOf(shot.get(FirebaseID.documentID));
+                        for(DocumentSnapshot snap: value.getDocuments()){//for-each문 value.getDocument()에 저장된 값을 DocumentSnapshot 형식의 snap을 통해 가져옴
+                            Map<String,Object> shot=snap.getData();//key는 string ,value는 object인 맵함수, value.getDocument의 정보 불러옴
+                            String documentID=String.valueOf(shot.get(FirebaseID.documentID));//key:String에 해당하는 Object를 가져와서 스트링으로 바꿔서 사용
                             String nickname=String.valueOf(shot.get((FirebaseID.nickname)));
                             String title= String.valueOf(snap.get(FirebaseID.title));
                             String contents=String.valueOf(shot.get(FirebaseID.contents));
                             post data=new post(documentID,nickname,title,contents);
                             mDatas.add(data);
                         }
-                            mAdapter=new postadapter(mDatas);
+                            mAdapter=new postadapter(mDatas);//mdatas를 madapter에 저장
                             mPostRecyclerView.setAdapter(mAdapter);
                         }
                     }
