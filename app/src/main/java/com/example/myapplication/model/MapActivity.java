@@ -21,7 +21,7 @@ public class MapActivity extends Activity{
         TMapView tmapview = new TMapView(this);
 
         //키값
-        tmapview.setSKPMapApiKey("");
+        tmapview.setSKTMapApiKey("l7xx2949b2e5de904dcaa74e3ffcdbe29864");
 
         tmapview.setCompassMode(true);
         tmapview.setIconVisibility(true);
