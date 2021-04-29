@@ -14,7 +14,7 @@ public class MapActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_map);
 
         //선언
         RelativeLayout relativeLayout = new RelativeLayout(this);

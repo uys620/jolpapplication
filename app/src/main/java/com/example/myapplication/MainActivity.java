@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPostRecyclerView=findViewById(R.id.main_recyclerview);
 
         findViewById(R.id.main_post_edit).setOnClickListener(this);
+        findViewById(R.id.map).setOnClickListener(this);
     }
 
     @Override
