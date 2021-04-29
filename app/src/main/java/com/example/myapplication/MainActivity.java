@@ -78,4 +78,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(new Intent(this,postActivity.class));
 
     }
+
+    @Override
+    public void onItemClick(View view, int position){
+        Intent intent = new Intent(this,Post2Activity.class);
+        intent.putExtra(FirebaseID.documentID,mDatas.get(position).getDocumentId());
+        startActivity(intent);
+    }
 }
