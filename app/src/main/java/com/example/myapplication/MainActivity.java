@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPostRecyclerView=findViewById(R.id.main_recyclerview);
 
         findViewById(R.id.main_post_edit).setOnClickListener(this);
+        findViewById(R.id.map).setOnClickListener(this);
     }
 
     @Override
@@ -76,13 +77,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         startActivity(new Intent(this,postActivity.class));
-
     }
 
-    @Override
+
+    /*@Override
     public void onItemClick(View view, int position){
         Intent intent = new Intent(this,Post2Activity.class);
         intent.putExtra(FirebaseID.documentID,mDatas.get(position).getDocumentId());
         startActivity(intent);
-    }
+    }*/
 }

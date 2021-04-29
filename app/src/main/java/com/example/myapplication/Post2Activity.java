@@ -21,8 +21,9 @@ public class Post2Activity extends AppCompatActivity {
     private TextView mTitleText, mContentsText, mNameText;
 
     private String id;
-
+    /*
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post2);
@@ -54,5 +55,5 @@ public class Post2Activity extends AppCompatActivity {
                         }
                     }
                 });
-    }
+    }*/
 }

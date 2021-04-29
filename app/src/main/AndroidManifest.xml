@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".Post2Activity"></activity>
+        <activity android:name=".MapActivity"></activity>
         <activity android:name=".postActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".signupActivity" />

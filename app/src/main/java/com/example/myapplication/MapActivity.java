@@ -1,4 +1,4 @@
-package com.example.myapplication.model;
+package com.example.myapplication;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,14 +14,14 @@ public class MapActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_map);
 
         //선언
         RelativeLayout relativeLayout = new RelativeLayout(this);
         TMapView tmapview = new TMapView(this);
 
         //키값
-        tmapview.setSKPMapApiKey("");
+        tmapview.setSKTMapApiKey("l7xx2949b2e5de904dcaa74e3ffcdbe29864");
 
         tmapview.setCompassMode(true);
         tmapview.setIconVisibility(true);
@@ -35,5 +35,4 @@ public class MapActivity extends Activity{
     }
 
 }
-
 
