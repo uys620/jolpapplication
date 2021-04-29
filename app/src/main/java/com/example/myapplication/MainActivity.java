@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
     /*@Override
     public void onItemClick(View view, int position){
         Intent intent = new Intent(this,Post2Activity.class);
