@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
     /*@Override
     public void onItemClick(View view, int position){
         Intent intent = new Intent(this,Post2Activity.class);
