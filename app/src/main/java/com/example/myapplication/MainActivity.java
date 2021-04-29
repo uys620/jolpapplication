@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity  {
 
 
     private FirebaseFirestore mStore=FirebaseFirestore.getInstance();
@@ -43,8 +43,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mPostRecyclerView=findViewById(R.id.main_recyclerview);
 
-        findViewById(R.id.main_post_edit).setOnClickListener(this);
-        findViewById(R.id.map).setOnClickListener(this);
+        findViewById(R.id.main_post_edit).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(),postActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.map).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(),MapActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -74,10 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
-    @Override
-    public void onClick(View v) {
-        startActivity(new Intent(this,postActivity.class));
-    }
+
 
 
     /*@Override
