@@ -52,6 +52,7 @@ public class MapActivity extends Activity{
         setContentView(relativeLayout);
 
 
+
         TMapData tmapdata = new TMapData();
         tmapdata.findAllPOI("은마아파트",100, new TMapData.FindAllPOIListenerCallback() {
             @Override
