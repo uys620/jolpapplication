@@ -16,6 +16,7 @@ import com.skt.Tmap.TMapView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Elizabeth on 2016-09-22.
@@ -31,10 +32,10 @@ public class MapActivity extends Activity{
         TMapView tmapview = new TMapView(this);
 
 
-        TMapMarkerItem markerItem1 = new TMapMarkerItem();//asljdflk;ajsdf
+
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.common_google_signin_btn_icon_dark);
-        markerItem1.setIcon(bitmap); // 마커 아이콘 지정
-        markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+
+
 
 
 
@@ -43,7 +44,7 @@ public class MapActivity extends Activity{
 
         tmapview.setCompassMode(true);
         tmapview.setIconVisibility(true);
-        tmapview.setZoomLevel(15);
+        tmapview.setZoomLevel(14);
         tmapview.setMapType(TMapView.MAPTYPE_STANDARD);
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
         tmapview.setTrackingMode(true);
@@ -52,16 +53,26 @@ public class MapActivity extends Activity{
         setContentView(relativeLayout);
 
 
-        
+
         TMapData tmapdata = new TMapData();
-        tmapdata.findAllPOI("은마아파트",100, new TMapData.FindAllPOIListenerCallback() {
+        tmapdata.findAllPOI("삼성역",100, new TMapData.FindAllPOIListenerCallback() {
             @Override
             public void onFindAllPOI(ArrayList poiItem) {
                 for(int i = 0; i < poiItem.size(); i++) {
                     TMapPOIItem  item = (TMapPOIItem) poiItem.get(i);
-                    TMapPoint tMapPoint1=new TMapPoint(item.getPOIPoint().getLatitude(),item.getPOIPoint().getLongitude());
+                    //TMapPoint tMapPoint1=new TMapPoint(item.getPOIPoint().getLatitude(),item.getPOIPoint().getLongitude());
+                    TMapMarkerItem markerItem1 = new TMapMarkerItem();//asljdflk;ajsdf
+
+                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+                    TMapPoint tMapPoint1=new TMapPoint(0,0);
+
+                    tMapPoint1.setLatitude(item.getPOIPoint().getLatitude());
+                    tMapPoint1.setLongitude(item.getPOIPoint().getLongitude());
+
+
                     markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
-                    tmapview.addMarkerItem("markerItem1", markerItem1); // 지도에 마커 추가
+                    tmapview.addMarkerItem("markerItem1"+i, markerItem1); // 지도에 마커 추가
                 }
             }
         });
