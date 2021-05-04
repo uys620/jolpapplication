@@ -35,7 +35,7 @@ public class MapActivity extends Activity{
 
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.common_google_signin_btn_icon_dark);
 
-
+        Bitmap bitmap1=BitmapFactory.decodeResource(this.getResources(),R.mipmap.ic_launcher_round);
 
 
 
@@ -69,6 +69,14 @@ public class MapActivity extends Activity{
 
                     tMapPoint1.setLatitude(item.getPOIPoint().getLatitude());
                     tMapPoint1.setLongitude(item.getPOIPoint().getLongitude());
+
+                    markerItem1.setCalloutTitle(((TMapPOIItem) poiItem.get(i)).getPOIName());//풍선뷰실험
+                    markerItem1.setCalloutSubTitle(((TMapPOIItem) poiItem.get(i)).getPOIName());
+                    markerItem1.setCanShowCallout(true);
+                    markerItem1.setAutoCalloutVisible(true);
+                    markerItem1.setCalloutRightButtonImage(bitmap1);
+
+
 
 
                     markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
