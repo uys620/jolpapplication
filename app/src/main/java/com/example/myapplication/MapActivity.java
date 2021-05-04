@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.skt.Tmap.TMapData;
@@ -39,6 +41,7 @@ public class MapActivity extends Activity{
         EditText Search = findViewById(R.id.Search_text);
         Button Searchbtn = findViewById(R.id.Search_btn);
         String SearchString;
+        float x;
 
 
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.common_google_signin_btn_icon_dark);
@@ -51,6 +54,22 @@ public class MapActivity extends Activity{
                 Intent intent = new Intent(view.getContext(), MapActivity.class);
                 intent.putExtra("SearchText", Search.getText().toString());
                 view.getContext().startActivity(intent);
+            }
+        });
+
+
+        tmapview.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+            @Override public boolean onPressEvent(ArrayList arrayList, ArrayList arrayList1, TMapPoint tMapPoint, PointF pointF) {
+
+            Toast.makeText(getApplicationContext(), tMapPoint.getLatitude() + ", " + tMapPoint.getLongitude(), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+            @Override
+            public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                //final float x=arrayList.get(0).getPositionX();
+                Toast.makeText(MapActivity.this, "onPressUp~!", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
 
@@ -101,7 +120,9 @@ public class MapActivity extends Activity{
         tmapview.setSightVisible(true);
         Linearlayout.addView(tmapview);
 
-        
+
+
+
     }
 
 }
