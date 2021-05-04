@@ -29,9 +29,8 @@ public class MapActivity extends Activity{
         setContentView(R.layout.activity_map);
 
         //선언
-        LinearLayout relativeLayout = (LinearLayout) findViewById(R.id.map_view);
+        LinearLayout relativeLayout = new LinearLayout(this);
         TMapView tmapview = new TMapView(this);
-
 
 
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.common_google_signin_btn_icon_dark);
@@ -76,7 +75,6 @@ public class MapActivity extends Activity{
                     markerItem1.setCanShowCallout(true);
                     markerItem1.setAutoCalloutVisible(true);
                     markerItem1.setCalloutRightButtonImage(bitmap1);
-
 
 
 
