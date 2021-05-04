@@ -29,7 +29,7 @@ public class MapActivity extends Activity{
         setContentView(R.layout.activity_map);
 
         //선언
-        LinearLayout relativeLayout = new LinearLayout(this);
+        LinearLayout Linearlayout =  (LinearLayout)findViewById(R.id.linearLayoutTmap);
         TMapView tmapview = new TMapView(this);
 
 
@@ -49,8 +49,7 @@ public class MapActivity extends Activity{
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
         tmapview.setTrackingMode(true);
         tmapview.setSightVisible(true);
-        relativeLayout.addView(tmapview);
-        setContentView(relativeLayout);
+        Linearlayout.addView(tmapview);
 
 
 
