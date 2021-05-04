@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.myapplication.R;
@@ -28,7 +29,7 @@ public class MapActivity extends Activity{
         setContentView(R.layout.activity_map);
 
         //선언
-        RelativeLayout relativeLayout = new RelativeLayout(this);
+        LinearLayout relativeLayout = (LinearLayout) findViewById(R.id.map_view);
         TMapView tmapview = new TMapView(this);
 
 

@@ -1,13 +1,17 @@
 package com.example.myapplication.adapters;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Post2Activity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.post;
 
@@ -41,11 +45,12 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
         return datas.size();
     }
 
-    class PostViewHolder extends RecyclerView.ViewHolder{//사용할 뷰홀더
+    class PostViewHolder extends RecyclerView.ViewHolder {//사용할 뷰홀더
 
         private TextView nickname;
         private TextView title;
         private TextView contents;
+
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,6 +58,29 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
             nickname=itemView.findViewById(R.id.item_post_nickname);
             title=itemView.findViewById(R.id.item_post_title);
             contents=itemView.findViewById(R.id.item_post_contents);
+
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION)
+                    {
+                        Log.d("테스트","클릭");
+                        post Post = datas.get(pos);
+                        Intent intent = new Intent(v.getContext(), Post2Activity.class);
+
+                        intent.putExtra("nickname",datas.get(pos).getNickname());
+                        intent.putExtra("title",datas.get(pos).getTitle());
+                        intent.putExtra("contents",datas.get(pos).getContents());
+
+                        v.getContext().startActivity(intent);
+                    }
+                }
+            });
         }
     }
+
+
 }
