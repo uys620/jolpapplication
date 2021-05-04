@@ -23,7 +23,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/Search"
+            android:id="@+id/Search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
