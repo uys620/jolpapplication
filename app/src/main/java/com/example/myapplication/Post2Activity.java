@@ -34,6 +34,7 @@ public class Post2Activity extends AppCompatActivity {
     private TextView mNickname;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
