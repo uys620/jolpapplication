@@ -45,6 +45,7 @@ public class Post2Activity extends AppCompatActivity {
         mNickname=findViewById(R.id.post2_name);
 
 
+
         Intent intent = getIntent();
 
         Title = intent.getExtras().getString("title");
