@@ -11,10 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".Post2Activity"></activity>
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".postActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Post2Activity"
+            android:launchMode="singleTop">
+        </activity>
+        <activity android:name=".MapActivity"
+            ></activity>
+        <activity android:name=".postActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTop"/>
         <activity android:name=".signupActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

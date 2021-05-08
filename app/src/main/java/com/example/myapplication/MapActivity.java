@@ -25,6 +25,7 @@ import com.skt.Tmap.TMapView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogManager;
 
 /**
  * Created by Elizabeth on 2016-09-22.
@@ -36,34 +37,47 @@ public class MapActivity extends Activity{
         setContentView(R.layout.activity_map);
 
         //선언
-        LinearLayout Linearlayout =  (LinearLayout)findViewById(R.id.linearLayoutTmap);
+        LinearLayout Linearlayout = (LinearLayout) findViewById(R.id.linearLayoutTmap);
         TMapView tmapview = new TMapView(this);
         EditText Search = findViewById(R.id.Search_text);
+        EditText SearchStart = findViewById(R.id.SearchStart_text);
+        EditText SearchDest = findViewById(R.id.SearchDest_text);
         Button Searchbtn = findViewById(R.id.Search_btn);
-        String SearchString;
+        String SearchString = getIntent().getExtras().getString("SearchText"),
+                SearchStartString = getIntent().getExtras().getString("SearchStartText"),
+                SearchDestString = getIntent().getExtras().getString("SearchDestText");
         float x;
+        TMapData tmapdata = new TMapData();
+        int flag = getIntent().getExtras().getInt("sd");
+
+
+        Search.setText(SearchString);
+        SearchStart.setText(SearchStartString);
+        SearchDest.setText(SearchDestString);
 
 
 
-
-
-
-        Searchbtn.setOnClickListener(new View.OnClickListener(){
+        Searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                Intent intent = new Intent(view.getContext(), MapActivity.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 intent.putExtra("SearchText", Search.getText().toString());
-                view.getContext().startActivity(intent);
+                intent.putExtra("SearchStartText", SearchStart.getText().toString());
+                intent.putExtra("SearchDestText", SearchDest.getText().toString());
+                intent.putExtra("sd",flag);
+                startActivity(intent);
+                finish();
             }
         });
 
 
         tmapview.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
-            @Override public boolean onPressEvent(ArrayList arrayList, ArrayList arrayList1, TMapPoint tMapPoint, PointF pointF) {
+            @Override
+            public boolean onPressEvent(ArrayList arrayList, ArrayList arrayList1, TMapPoint tMapPoint, PointF pointF) {
 
-            Toast.makeText(getApplicationContext(), tMapPoint.getLatitude() + ", " + tMapPoint.getLongitude(), Toast.LENGTH_SHORT).show();
-            return false;
-        }
+                Toast.makeText(getApplicationContext(), tMapPoint.getLatitude() + ", " + tMapPoint.getLongitude(), Toast.LENGTH_SHORT).show();
+                return false;
+            }
 
             @Override
             public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
@@ -74,62 +88,26 @@ public class MapActivity extends Activity{
         });
 
 
-
-
-
-
-
-
-
-     //   tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback(){
-     //       @Override
-     //       public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
-
-       //     }
-      //  });
-
-
-
-
-
-
-
-        TMapData tmapdata = new TMapData();
-
-        SearchString = getIntent().getExtras().getString("SearchText");
-        tmapdata.findAllPOI(SearchString,100, new TMapData.FindAllPOIListenerCallback() {
+        tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
             @Override
-            public void onFindAllPOI(ArrayList poiItem) {
-                for(int i = 0; i < poiItem.size(); i++) {
-                    TMapPOIItem  item = (TMapPOIItem) poiItem.get(i);
-                    //TMapPoint tMapPoint1=new TMapPoint(item.getPOIPoint().getLatitude(),item.getPOIPoint().getLongitude());
-                    TMapMarkerItem markerItem1 = new TMapMarkerItem();//asljdflk;ajsdf
-                    Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ic_edit);
-
-                    Bitmap bitmap1=BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.side);
-                    bitmap1=Bitmap.createScaledBitmap(bitmap1,50,50,false);
-                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
-                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
-                    TMapPoint tMapPoint1=new TMapPoint(0,0);
-
-                    tMapPoint1.setLatitude(item.getPOIPoint().getLatitude());
-                    tMapPoint1.setLongitude(item.getPOIPoint().getLongitude());
-
-                    markerItem1.setCalloutTitle(((TMapPOIItem) poiItem.get(i)).getPOIName());//풍선뷰실험
-                    markerItem1.setCalloutSubTitle(((TMapPOIItem) poiItem.get(i)).getPOIAddress());
-                    markerItem1.setCanShowCallout(true);
-                    //markerItem1.setAutoCalloutVisible(true);
-
-                    markerItem1.setCalloutRightButtonImage(bitmap1);
-
-
-
-                    markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
-                    tmapview.addMarkerItem("markerItem1"+i, markerItem1); // 지도에 마커 추가
-
+            public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                if ( flag == 0 || flag == 2) {
+                    intent.putExtra("SearchStartText", tMapMarkerItem.getCalloutTitle());
+                    intent.putExtra("SearchText", Search.getText().toString());
+                    intent.putExtra("SearchDestText", SearchDest.getText().toString());
+                    intent.putExtra("sd",1);
+                } else {
+                    intent.putExtra("SearchDestText", tMapMarkerItem.getCalloutTitle());
+                    intent.putExtra("SearchText", Search.getText().toString());
+                    intent.putExtra("SearchStartText", SearchStart.getText().toString());
+                    intent.putExtra("sd",2);
                 }
+                startActivity(intent);
+                finish();
             }
         });
+
 
         //키값
         tmapview.setSKTMapApiKey("l7xx2949b2e5de904dcaa74e3ffcdbe29864");
@@ -143,6 +121,102 @@ public class MapActivity extends Activity{
         tmapview.setSightVisible(true);
         Linearlayout.addView(tmapview);
 
+        if(flag != 2) {
+            tmapdata.findAllPOI(SearchString, 100, new TMapData.FindAllPOIListenerCallback() {
+                @Override
+                public void onFindAllPOI(ArrayList poiItem) {
+                    for (int i = 0; i < poiItem.size(); i++) {
+                        TMapPOIItem item = (TMapPOIItem) poiItem.get(i);
+                        //TMapPoint tMapPoint1=new TMapPoint(item.getPOIPoint().getLatitude(),item.getPOIPoint().getLongitude());
+                        TMapMarkerItem markerItem1 = new TMapMarkerItem();//asljdflk;ajsdf
+                        Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ic_edit);
+
+                        Bitmap bitmap1 = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.side);
+                        bitmap1 = Bitmap.createScaledBitmap(bitmap1, 50, 50, false);
+                        markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+                        markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+                        TMapPoint tMapPoint1 = new TMapPoint(0, 0);
+
+                        tMapPoint1.setLatitude(item.getPOIPoint().getLatitude());
+                        tMapPoint1.setLongitude(item.getPOIPoint().getLongitude());
+
+                        markerItem1.setCalloutTitle(((TMapPOIItem) poiItem.get(i)).getPOIName());//풍선뷰실험
+                        markerItem1.setCalloutSubTitle(((TMapPOIItem) poiItem.get(i)).getPOIAddress());
+                        markerItem1.setCanShowCallout(true);
+                        //markerItem1.setAutoCalloutVisible(true);
+
+                        markerItem1.setCalloutRightButtonImage(bitmap1);
+                        markerItem1.setCalloutLeftImage(bitmap1);
+
+
+                        markerItem1.setTMapPoint(tMapPoint1); // 마커의 좌표 지정
+                        tmapview.addMarkerItem("markerItem1" + i, markerItem1); // 지도에 마커 추가
+                    }
+                }
+            });
+        }
+        else{
+            tmapdata.findTitlePOI(SearchStartString, new TMapData.FindTitlePOIListenerCallback() {
+                @Override
+                public void onFindTitlePOI(ArrayList poiItem) {
+                    TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
+                    TMapMarkerItem markerItem1 = new TMapMarkerItem();//asljdflk;ajsdf
+                    Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ic_edit);
+
+                    Bitmap bitmap1 = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.side);
+                    bitmap1 = Bitmap.createScaledBitmap(bitmap1, 50, 50, false);
+                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+                    TMapPoint tMapPoint1 = new TMapPoint(0, 0);
+
+                    tMapPoint1.setLatitude(item.getPOIPoint().getLatitude());
+                    tMapPoint1.setLongitude(item.getPOIPoint().getLongitude());
+
+                    markerItem1.setCalloutTitle(((TMapPOIItem) poiItem.get(0)).getPOIName());//풍선뷰실험
+                    markerItem1.setCalloutSubTitle(((TMapPOIItem) poiItem.get(0)).getPOIAddress());
+                    markerItem1.setCanShowCallout(true);
+                    //markerItem1.setAutoCalloutVisible(true);
+
+                    markerItem1.setCalloutRightButtonImage(bitmap1);
+                    markerItem1.setCalloutLeftImage(bitmap1);
+
+
+                    markerItem1.setTMapPoint(tMapPoint1); // 마커의 좌표 지정
+                    tmapview.addMarkerItem("markerItem2", markerItem1); // 지도에 마커 추가
+                }
+            });
+
+            tmapdata.findTitlePOI(SearchDestString, new TMapData.FindTitlePOIListenerCallback() {
+                @Override
+                public void onFindTitlePOI(ArrayList poiItem) {
+                    TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
+                    TMapMarkerItem markerItem1 = new TMapMarkerItem();//asljdflk;ajsdf
+                    Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ic_edit);
+
+                    Bitmap bitmap1 = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.side);
+                    bitmap1 = Bitmap.createScaledBitmap(bitmap1, 50, 50, false);
+                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+                    TMapPoint tMapPoint1 = new TMapPoint(0, 0);
+
+                    tMapPoint1.setLatitude(item.getPOIPoint().getLatitude());
+                    tMapPoint1.setLongitude(item.getPOIPoint().getLongitude());
+
+                    markerItem1.setCalloutTitle(((TMapPOIItem) poiItem.get(0)).getPOIName());//풍선뷰실험
+                    markerItem1.setCalloutSubTitle(((TMapPOIItem) poiItem.get(0)).getPOIAddress());
+                    markerItem1.setCanShowCallout(true);
+                    //markerItem1.setAutoCalloutVisible(true);
+
+                    markerItem1.setCalloutRightButtonImage(bitmap1);
+                    markerItem1.setCalloutLeftImage(bitmap1);
+
+
+                    markerItem1.setTMapPoint(tMapPoint1); // 마커의 좌표 지정
+                    tmapview.addMarkerItem("markerItem3", markerItem1); // 지도에 마커 추가
+                }
+            });
+
+        }
 
 
 

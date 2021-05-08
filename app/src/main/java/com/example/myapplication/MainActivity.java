@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View view){
                 Intent intent = new Intent(getApplicationContext(),MapActivity.class);
                 intent.putExtra("SearchText","");
+                intent.putExtra("SearchStartText","");
+                intent.putExtra("SearchDestText","");
+                intent.putExtra("sd",0);
                 startActivity(intent);
             }
         });
