@@ -44,9 +44,9 @@ public class MapActivity extends Activity{
         float x;
 
 
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.common_google_signin_btn_icon_dark);
 
-        Bitmap bitmap1=BitmapFactory.decodeResource(this.getResources(),R.mipmap.ic_launcher_round);
+
+
 
         Searchbtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -67,11 +67,30 @@ public class MapActivity extends Activity{
 
             @Override
             public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                //final float x=arrayList.get(0).getPositionX();
-                Toast.makeText(MapActivity.this, "onPressUp~!", Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(MapActivity.this, "onPressUp~!", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
+
+
+
+
+
+
+
+
+
+     //   tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback(){
+     //       @Override
+     //       public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
+
+       //     }
+      //  });
+
+
+
+
 
 
 
@@ -85,7 +104,10 @@ public class MapActivity extends Activity{
                     TMapPOIItem  item = (TMapPOIItem) poiItem.get(i);
                     //TMapPoint tMapPoint1=new TMapPoint(item.getPOIPoint().getLatitude(),item.getPOIPoint().getLongitude());
                     TMapMarkerItem markerItem1 = new TMapMarkerItem();//asljdflk;ajsdf
+                    Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ic_edit);
 
+                    Bitmap bitmap1=BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.side);
+                    bitmap1=Bitmap.createScaledBitmap(bitmap1,50,50,false);
                     markerItem1.setIcon(bitmap); // 마커 아이콘 지정
                     markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
                     TMapPoint tMapPoint1=new TMapPoint(0,0);
@@ -94,9 +116,10 @@ public class MapActivity extends Activity{
                     tMapPoint1.setLongitude(item.getPOIPoint().getLongitude());
 
                     markerItem1.setCalloutTitle(((TMapPOIItem) poiItem.get(i)).getPOIName());//풍선뷰실험
-                    markerItem1.setCalloutSubTitle(((TMapPOIItem) poiItem.get(i)).getPOIName());
+                    markerItem1.setCalloutSubTitle(((TMapPOIItem) poiItem.get(i)).getPOIAddress());
                     markerItem1.setCanShowCallout(true);
-                    markerItem1.setAutoCalloutVisible(true);
+                    //markerItem1.setAutoCalloutVisible(true);
+
                     markerItem1.setCalloutRightButtonImage(bitmap1);
 
 
