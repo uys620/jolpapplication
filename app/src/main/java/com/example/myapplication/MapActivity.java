@@ -25,6 +25,7 @@ import com.skt.Tmap.TMapView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.LogManager;
 
 /**
@@ -218,9 +219,22 @@ public class MapActivity extends Activity{
 
         }
 
+        openroadapitask t=new openroadapitask();
+        try{
+            roadinfo r=t.execute().get();
+           // System.out.println("받고자하는것:"+r.getLinkname());
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
 
 
     }
+
+
 
 }
 
