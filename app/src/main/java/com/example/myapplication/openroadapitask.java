@@ -2,12 +2,15 @@ package com.example.myapplication;
 
 import android.os.AsyncTask;
 
-public class openroadapitask extends AsyncTask<Void,Void,roadinfo> {
-    @Override
-    public roadinfo doInBackground(Void... params){
-        roadAPIclient client=new roadAPIclient();
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
-        roadinfo r=client.getroadinfo();
-        return r;
+public class openroadapitask extends AsyncTask<Void,Void,ArrayList<roadinfo>> {
+    @Override
+    public ArrayList<roadinfo> doInBackground(Void... params){
+        roadAPIclient client=new roadAPIclient();
+        ArrayList<roadinfo> roadinfoArry = new ArrayList<roadinfo>();
+        roadinfoArry = client.getroadinfo();
+        return roadinfoArry;
     }
 }

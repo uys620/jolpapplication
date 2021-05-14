@@ -22,7 +22,15 @@ import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -43,6 +51,7 @@ public class MapActivity extends Activity{
         EditText Search = findViewById(R.id.Search_text);
         EditText SearchStart = findViewById(R.id.SearchStart_text);
         EditText SearchDest = findViewById(R.id.SearchDest_text);
+        EditText test = findViewById(R.id.link_test);
         Button Searchbtn = findViewById(R.id.Search_btn);
         String SearchString = getIntent().getExtras().getString("SearchText"),
                 SearchStartString = getIntent().getExtras().getString("SearchStartText"),
@@ -52,9 +61,18 @@ public class MapActivity extends Activity{
         int flag = getIntent().getExtras().getInt("sd");
 
 
+
+
         Search.setText(SearchString);
         SearchStart.setText(SearchStartString);
+
+
+
         SearchDest.setText(SearchDestString);
+
+
+
+
 
 
 
@@ -220,16 +238,18 @@ public class MapActivity extends Activity{
         }
 
         openroadapitask t=new openroadapitask();
+
+
         try{
-            roadinfo r=t.execute().get();
-           // System.out.println("받고자하는것:"+r.getLinkname());
+            ArrayList<roadinfo> roadinfoArry = t.execute().get();
+            for(int i = 0; i < roadinfoArry.size(); i++) {
+                System.out.println("받고자하는것:" + roadinfoArry.get(i).getLinkname());
+            }
         }catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-
 
 
     }
