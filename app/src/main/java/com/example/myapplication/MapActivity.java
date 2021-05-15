@@ -242,7 +242,13 @@ public class MapActivity extends Activity{
 
         try{
             ArrayList<roadinfo> roadinfoArry = t.execute().get();
+            Graph g= new Graph(34);
+
             for(int i = 0; i < roadinfoArry.size(); i++) {
+                if(roadinfoArry.get(i).getLinkid()==1024741){
+                    g.input(1,5,roadinfoArry.get(i).getTime());
+                }
+
                 System.out.println("받고자하는것:" + roadinfoArry.get(i).getLinkname());
             }
         }catch (InterruptedException e) {
@@ -250,6 +256,8 @@ public class MapActivity extends Activity{
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+
 
 
     }
