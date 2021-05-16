@@ -53,10 +53,10 @@ public class Graph {
         for(i=0;i<n+1;i++){
             for(j=0;j<n+1;j++){
                 if(maps[i][j]!=0){
-                    for(int x=0;x<93;x++){
+                    for(int x=0; x<r.size(); x++){
                         System.out.println("최종포문진입");
-                        if(r.get(x).getLinkid()==maps[i][j]){
-                        maps[i][j]=r.get(i).getTime();
+                        if(Integer.parseInt(r.get(x).getLinkname())==maps[i][j]){
+                        maps[i][j]=r.get(x).getTime();
                         }
                     }
                 }
