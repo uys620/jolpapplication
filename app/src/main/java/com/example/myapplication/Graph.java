@@ -54,16 +54,13 @@ public class Graph {
             for(j=0;j<n+1;j++){
                 if(maps[i][j]!=0){
                     for(int x=0; x<r.size(); x++){
-                        System.out.println("최종포문진입");
-                        if(Integer.parseInt(r.get(x).getLinkname())==maps[i][j]){
+                        if(Integer.parseInt(r.get(x).getLinkname()) == maps[i][j]){
                         maps[i][j]=r.get(x).getTime();
                         }
                     }
                 }
             }
         }
-        System.out.println(maps[1][5]);
-
     }
     public void dijkstra(int v){
         double distance[]=new double[n+1];
@@ -104,18 +101,10 @@ public class Graph {
                     }
                 }
             }
-            //for(int i=1;i<n+1;i++){
-                System.out.println(distance[2]+" ");
-           // }
-
-
-
-
 
         }
 
-
-
-
+        System.out.println(distance[2]+" ");
     }
+
 }
