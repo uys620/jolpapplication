@@ -63,6 +63,7 @@ public class Graph {
         }
     }
     public void dijkstra(int v){
+
         double distance[]=new double[n+1];
         boolean[] check=new boolean[n+1];
         for(int i=1;i<n+1;i++){
@@ -70,6 +71,7 @@ public class Graph {
         }
         distance[v]=0;
         check[v]=true;
+
         for(i=1;i<n+1;i++){
             if(!check[i]&&maps[v][i]!=0){
                 distance[i]=maps[v][i];

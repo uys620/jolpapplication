@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.sax.StartElementListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +52,7 @@ public class MapActivity extends Activity{
         EditText Search = findViewById(R.id.Search_text);
         EditText SearchStart = findViewById(R.id.SearchStart_text);
         EditText SearchDest = findViewById(R.id.SearchDest_text);
-        EditText test = findViewById(R.id.link_test);
+        Button roadSearchBtn = findViewById(R.id.roadSearch_btn);
         Button Searchbtn = findViewById(R.id.Search_btn);
         String SearchString = getIntent().getExtras().getString("SearchText"),
                 SearchStartString = getIntent().getExtras().getString("SearchStartText"),
@@ -59,22 +60,71 @@ public class MapActivity extends Activity{
         float x;
         TMapData tmapdata = new TMapData();
         int flag = getIntent().getExtras().getInt("sd");
+        searchpoint startP = new searchpoint(0,0);
+        searchpoint destP = new searchpoint(0,0);
+
+
 
 
 
 
         Search.setText(SearchString);
         SearchStart.setText(SearchStartString);
-
-
-
         SearchDest.setText(SearchDestString);
 
 
 
 
 
+        roadSearchBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
 
+                /*if(flag != 2){
+                    // 도착지와 출발지를 입력해 주세요. 오류 메세지.
+                    Toast.makeText(MapActivity.this, "출발지와 도착지를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                }
+                else*/{
+                    tmapdata.findTitlePOI(SearchStartString, new TMapData.FindTitlePOIListenerCallback() {
+                        @Override
+                        public void onFindTitlePOI(ArrayList poiItem) {
+                            TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
+                            TMapMarkerItem markerItem1 = new TMapMarkerItem();
+                            TMapPoint tMapPoint1 = new TMapPoint(0, 0);
+                            startP.setLatitude(item.getPOIPoint().getLatitude());
+                            startP.setLongitude(item.getPOIPoint().getLongitude());
+
+                        }
+                    });
+
+                    tmapdata.findTitlePOI(SearchDestString, new TMapData.FindTitlePOIListenerCallback() {
+                        @Override
+                        public void onFindTitlePOI(ArrayList poiItem) {
+                            TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
+                            TMapMarkerItem markerItem1 = new TMapMarkerItem();
+
+                            markerItem1.setPosition(0.5f, 1.0f);
+                            TMapPoint tMapPoint1 = new TMapPoint(0, 0);
+
+                            destP.setLatitude(item.getPOIPoint().getLatitude());
+                            destP.setLongitude(item.getPOIPoint().getLongitude());
+
+                        }
+                    });
+
+                    // 다익스트라 여기에 작성하면될듯
+
+
+                    System.out.println("위도 경도:" + startP.getLatitude() + "," + startP.getLongitude());
+                    System.out.println("위도 경도:" + destP.getLatitude() + "," + destP.getLongitude());
+                    System.out.println(startP.getMin_Value());
+                    System.out.println(destP.getMin_Value());
+
+
+
+                }
+            }
+        });
 
         Searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +180,6 @@ public class MapActivity extends Activity{
 
         //키값
         tmapview.setSKTMapApiKey("l7xx2949b2e5de904dcaa74e3ffcdbe29864");
-
         tmapview.setCompassMode(true);
         tmapview.setIconVisibility(true);
         tmapview.setZoomLevel(14);
@@ -200,6 +249,7 @@ public class MapActivity extends Activity{
                     markerItem1.setCalloutLeftImage(bitmap1);
 
 
+
                     markerItem1.setTMapPoint(tMapPoint1); // 마커의 좌표 지정
                     tmapview.addMarkerItem("markerItem2", markerItem1); // 지도에 마커 추가
                 }
@@ -230,11 +280,12 @@ public class MapActivity extends Activity{
                     markerItem1.setCalloutLeftImage(bitmap1);
 
 
+
+
                     markerItem1.setTMapPoint(tMapPoint1); // 마커의 좌표 지정
                     tmapview.addMarkerItem("markerItem3", markerItem1); // 지도에 마커 추가
                 }
             });
-
         }
 
         openroadapitask t=new openroadapitask();
@@ -260,7 +311,6 @@ public class MapActivity extends Activity{
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
 
 
 
