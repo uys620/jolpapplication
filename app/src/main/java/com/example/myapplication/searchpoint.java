@@ -35,6 +35,7 @@ public class searchpoint {
         return this.min_value;
     }
 
+
     public double getLongitude() {
         return longitude;
     }
