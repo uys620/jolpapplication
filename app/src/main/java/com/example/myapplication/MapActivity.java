@@ -113,10 +113,35 @@ public class MapActivity extends Activity{
                     });
 
                     // 다익스트라 여기에 작성하면될듯
+                    openroadapitask t=new openroadapitask();
 
 
-                    System.out.println("위도 경도:" + startP.getLatitude() + "," + startP.getLongitude());
-                    System.out.println("위도 경도:" + destP.getLatitude() + "," + destP.getLongitude());
+                    try{
+
+                        ArrayList<roadinfo> roadinfoArry = t.execute().get();
+                        Graph g= new Graph();
+                        g.input(roadinfoArry);
+                        //System.out.println(startP.getMin_Value());
+                        g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
+                        //g.dijkstra(1,2);
+
+
+//            for(int i = 0; i < roadinfoArry.size(); i++) {
+//                if(roadinfoArry.get(i).getLinkid()==1024741){
+//                    g.input(roadinfoArry);
+//                }
+//
+//                System.out.println("받고자하는것:" + roadinfoArry.get(i).getLinkname());
+//            }
+                    }catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
+
+                  //  System.out.println("위도 경도:" + startP.getLatitude() + "," + startP.getLongitude());
+                   // System.out.println("위도 경도:" + destP.getLatitude() + "," + destP.getLongitude());
                     System.out.println(startP.getMin_Value());
                     System.out.println(destP.getMin_Value());
 
@@ -288,29 +313,7 @@ public class MapActivity extends Activity{
             });
         }
 
-        openroadapitask t=new openroadapitask();
 
-
-        try{
-
-            ArrayList<roadinfo> roadinfoArry = t.execute().get();
-            Graph g= new Graph();
-            g.input(roadinfoArry);
-            g.dijkstra(1);
-
-
-//            for(int i = 0; i < roadinfoArry.size(); i++) {
-//                if(roadinfoArry.get(i).getLinkid()==1024741){
-//                    g.input(roadinfoArry);
-//                }
-//
-//                System.out.println("받고자하는것:" + roadinfoArry.get(i).getLinkname());
-//            }
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
 
 

@@ -2,10 +2,13 @@ package com.example.myapplication;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Graph {
     private int n,i,j;
     private double maps[][];
+    private int[] route;
 
     public Graph(){
         this.n=34;
@@ -46,6 +49,7 @@ public class Graph {
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1028622,0,0,0,0},//33
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1028262,0,0,0}//34
         };
+        route=new int[n+1];
 
 
     }
@@ -62,7 +66,7 @@ public class Graph {
             }
         }
     }
-    public void dijkstra(int v){
+    public void dijkstra(int v,int y){
 
         double distance[]=new double[n+1];
         boolean[] check=new boolean[n+1];
@@ -71,10 +75,12 @@ public class Graph {
         }
         distance[v]=0;
         check[v]=true;
+        route[v]=v;
 
         for(i=1;i<n+1;i++){
             if(!check[i]&&maps[v][i]!=0){
                 distance[i]=maps[v][i];
+                route[i]=v;
             }
         }
 
@@ -100,13 +106,27 @@ public class Graph {
                 if(!check[i] && maps[min_index][i]!=0){
                     if(distance[i]>distance[min_index]+maps[min_index][i]){
                         distance[i] = distance[min_index]+maps[min_index][i];
+                        route[i]=min_index;
                     }
                 }
             }
 
         }
-
-        System.out.println(distance[2]+" ");
+        System.out.println("시작노드"+v+"부터 노드"+y+"까지 걸리는 시간:"+distance[y+1]);
+        List<Integer> rou =new ArrayList<Integer>();
+        //String rout="";
+        int index=y;
+        while(true){
+            if(route[index]==index)break;
+            //rout+=" "+Integer.toString(route[index]);
+            rou.add(route[index]);
+            index=route[index];
+        }
+        //StringBuilder sb=new StringBuilder((rout));
+        //System.out.println(sb.reverse()+Integer.toString(y));
+        Collections.reverse(rou);
+        rou.add(y);
+        System.out.println(rou);
     }
 
 }
