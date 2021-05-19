@@ -51,4 +51,12 @@ public class searchpoint {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
+    public double getX(int i) {
+        return x[i];
+    }
+
+    public double getY(int i) {
+        return y[i];
+    }
 }

@@ -66,7 +66,7 @@ public class Graph {
             }
         }
     }
-    public void dijkstra(int v,int y){
+    public List<Integer> dijkstra(int v,int y){
 
         double distance[]=new double[n+1];
         boolean[] check=new boolean[n+1];
@@ -126,7 +126,6 @@ public class Graph {
         //System.out.println(sb.reverse()+Integer.toString(y));
         Collections.reverse(rou);
         rou.add(y);
-        System.out.println(rou);
+        return rou;
     }
-
 }
