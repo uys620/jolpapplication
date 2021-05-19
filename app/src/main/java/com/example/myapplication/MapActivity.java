@@ -124,16 +124,16 @@ public class MapActivity extends Activity{
                         Graph g= new Graph();
                         g.input(roadinfoArry);
                         //System.out.println(startP.getMin_Value());
-                        List<Integer> route = g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
-                        //g.dijkstra(1,2);
-                        System.out.println(route.size() + ",");
+                        //List<Integer> route = g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
+                        List<Integer> route = g.dijkstra(1,31);
+                        //System.out.println(route.size() + ",");
 
                         ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
                         for(int i = 0; i < route.size(); i++){
                             searchpoint s = new searchpoint(0,0);
                             System.out.println("받고자하는것:" + s.getX(route.get(i)) + "," + s.getY(route.get(i)));
                             alTMapPoint.add( new TMapPoint( s.getX(route.get(i)), s.getY(route.get(i))) );
-                        }
+                       }
 
 
                         TMapPolyLine tMapPolyLine = new TMapPolyLine();

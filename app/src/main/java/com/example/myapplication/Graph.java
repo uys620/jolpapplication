@@ -112,7 +112,7 @@ public class Graph {
             }
 
         }
-        System.out.println("시작노드"+v+"부터 노드"+y+"까지 걸리는 시간:"+distance[y+1]);
+        System.out.println("시작노드"+v+"부터 노드"+y+"까지 걸리는 시간:"+distance[y]);
         List<Integer> rou =new ArrayList<Integer>();
         //String rout="";
         int index=y;
