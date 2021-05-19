@@ -124,8 +124,9 @@ public class MapActivity extends Activity{
                         Graph g= new Graph();
                         g.input(roadinfoArry);
                         //System.out.println(startP.getMin_Value());
-                        //List<Integer> route = g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
-                        List<Integer> route = g.dijkstra(1,31);
+                        System.out.println("시작노드, 도착노드:" + startP.getMin_Value() + "," + destP.getMin_Value());
+                        List<Integer> route = g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
+                        //List<Integer> route = g.dijkstra(1,31);
                         //System.out.println(route.size() + ",");
 
                         ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
@@ -175,7 +176,12 @@ public class MapActivity extends Activity{
                 intent.putExtra("SearchText", Search.getText().toString());
                 intent.putExtra("SearchStartText", SearchStart.getText().toString());
                 intent.putExtra("SearchDestText", SearchDest.getText().toString());
-                intent.putExtra("sd",flag);
+                if(flag == 2){
+                    intent.putExtra("sd",0);
+                }
+                else {
+                    intent.putExtra("sd", flag);
+                }
                 startActivity(intent);
                 finish();
             }
@@ -229,6 +235,7 @@ public class MapActivity extends Activity{
         tmapview.setTrackingMode(true);
         tmapview.setSightVisible(true);
         Linearlayout.addView(tmapview);
+        tmapview.setCenterPoint(127.031088, 37.498976);
 
         if(flag != 2) {
             tmapdata.findAllPOI(SearchString, 100, new TMapData.FindAllPOIListenerCallback() {

@@ -1,10 +1,20 @@
 package com.example.myapplication;
 
+import java.util.List;
+
 public class roadinfo {
     Double time;
     int linkid;
     String linkname;
-
+    /*List<double> Longitude;
+    List<double> Latitude;
+    public roadinfo(){
+        time = 0.0;
+        linkid = 0;
+        linkname = "";
+        Longitude = new List<double>();
+        Latitude = new List<double>();
+    }*/
     public int getIndex() {
         return index;
     }
