@@ -232,7 +232,7 @@ public class MapActivity extends Activity{
         tmapview.setZoomLevel(14);
         tmapview.setMapType(TMapView.MAPTYPE_STANDARD);
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
-        tmapview.setTrackingMode(true);
+        tmapview.setTrackingMode(false);
         tmapview.setSightVisible(true);
         Linearlayout.addView(tmapview);
         tmapview.setCenterPoint(127.031088, 37.498976);
