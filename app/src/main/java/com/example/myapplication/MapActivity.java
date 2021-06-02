@@ -48,7 +48,6 @@ public class MapActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        //선언
         LinearLayout Linearlayout = (LinearLayout) findViewById(R.id.linearLayoutTmap);
         TMapView tmapview = new TMapView(this);
         EditText Search = findViewById(R.id.Search_text);
