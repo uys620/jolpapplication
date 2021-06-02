@@ -114,6 +114,7 @@ public class MapActivity extends Activity{
                         }
                     });
 
+
                     // 다익스트라 여기에 작성하면될듯
                     openroadapitask t=new openroadapitask();
 

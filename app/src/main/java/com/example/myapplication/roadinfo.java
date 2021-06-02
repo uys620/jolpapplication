@@ -6,15 +6,25 @@ public class roadinfo {
     Double time;
     int linkid;
     String linkname;
+    String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     /*List<double> Longitude;
-    List<double> Latitude;
-    public roadinfo(){
-        time = 0.0;
-        linkid = 0;
-        linkname = "";
-        Longitude = new List<double>();
-        Latitude = new List<double>();
-    }*/
+        List<double> Latitude;
+        public roadinfo(){
+            time = 0.0;
+            linkid = 0;
+            linkname = "";
+            Longitude = new List<double>();
+            Latitude = new List<double>();
+        }*/
     public int getIndex() {
         return index;
     }

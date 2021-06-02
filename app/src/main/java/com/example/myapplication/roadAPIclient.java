@@ -52,12 +52,17 @@ public class roadAPIclient {
     private ArrayList<roadinfo> parseJSON(JSONObject json) throws JSONException{
         ArrayList<roadinfo> roadinfoArry = new ArrayList<roadinfo>();
         JSONArray jArry = json.getJSONArray("features");
+        String s="LineString";
         for(int i = 0; i < jArry.length(); i++) {
             roadinfo r = new roadinfo();
-            r.setLinkname(jArry.getJSONObject(i).getJSONObject("properties").getString("id"));
-            r.setTime(jArry.getJSONObject(i).getJSONObject("properties").getDouble("time"));
-            r.setIndex(jArry.getJSONObject(i).getJSONObject("properties").getInt("index"));
-            roadinfoArry.add(r);
+            String s2=jArry.getJSONObject(i).getJSONObject("geometry").getString("type");
+            if(s2.equals(s)){
+                r.setLinkname(jArry.getJSONObject(i).getJSONObject("properties").getString("id"));
+                r.setTime(jArry.getJSONObject(i).getJSONObject("properties").getDouble("time"));
+                r.setIndex(jArry.getJSONObject(i).getJSONObject("properties").getInt("index"));
+                roadinfoArry.add(r);
+            }
+
         }
         return roadinfoArry;
     }

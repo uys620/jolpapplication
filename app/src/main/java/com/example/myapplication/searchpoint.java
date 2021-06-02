@@ -14,7 +14,7 @@ public class searchpoint {
         min_value=Integer.MAX_VALUE;
         longitude = 0;
         latitude = 0;
-        for(int i=1;i<34;i++){
+        for(int i=1;i<35;i++){
             if(min>(x[i]-a)*(x[i]-a)+(y[i]-b)*(y[i]-b)){
                 min=(x[i]-a)*(x[i]-a)+(y[i]-b)*(y[i]-b);
                 min_value=i;
@@ -26,7 +26,7 @@ public class searchpoint {
         min=Integer.MAX_VALUE;
         double a = this.latitude;
         double b = this.longitude;
-        for(int i=1;i<34;i++){
+        for(int i=1;i<35;i++){
             if(min>(1000*x[i]-1000*a)*(1000*x[i]-1000*a)+(1000*y[i]-1000*b)*(1000*y[i]-1000*b)){
                 min=(1000*x[i]-1000*a)*(1000*x[i]-1000*a)+(1000*y[i]-1000*b)*(1000*y[i]-1000*b);
                 this.min_value=i;
