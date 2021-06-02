@@ -62,6 +62,15 @@ public class MainActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.logout).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
