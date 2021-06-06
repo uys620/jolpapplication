@@ -39,9 +39,6 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.LogManager;
 
-/**
- * Created by Elizabeth on 2016-09-22.
- */
 public class MapActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +60,8 @@ public class MapActivity extends Activity{
         int flag = getIntent().getExtras().getInt("sd");
         searchpoint startP = new searchpoint(0,0);
         searchpoint destP = new searchpoint(0,0);
+        int count = 0;
+
 
 
 
@@ -119,7 +118,6 @@ public class MapActivity extends Activity{
 
 
                     try{
-
                         ArrayList<roadinfo> roadinfoArry = t.execute().get();
                         Graph g= new Graph();
                         g.input(roadinfoArry);
@@ -137,14 +135,16 @@ public class MapActivity extends Activity{
                        }
 
 
-                        TMapPolyLine tMapPolyLine = new TMapPolyLine();
-                        tMapPolyLine.setLineColor(Color.BLUE);
-                        tMapPolyLine.setLineWidth(2);
+                        {
+                            TMapPolyLine tMapPolyLine = new TMapPolyLine();
+                            tMapPolyLine.setLineColor(Color.BLUE);
+                            tMapPolyLine.setLineWidth(2);
 
-                        for( int i=0; i<alTMapPoint.size(); i++ ) {
-                            tMapPolyLine.addLinePoint( alTMapPoint.get(i) );
+                            for (int i = 0; i < alTMapPoint.size(); i++) {
+                                tMapPolyLine.addLinePoint(alTMapPoint.get(i));
+                            }
+                            tmapview.addTMapPolyLine("Line1", tMapPolyLine);
                         }
-                        tmapview.addTMapPolyLine("Line1", tMapPolyLine);
 
 
 //            for(int i = 0; i < roadinfoArry.size(); i++) {
