@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/my_contetns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
+            <Button
+                android:id="@+id/my_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tmy_post" />
+
+            <Button
+                android:id="@+id/my_reply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tmy_reply" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/market_board"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/t_market_board" />
+
+            <Button
+                android:id="@+id/free_board"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/t_free_board" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

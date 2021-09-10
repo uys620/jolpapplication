@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="tmy_post">내가 쓴 글</string>
+    <string name="tmy_reply">내가 쓴 댓글</string>
+    <string name="t_market_board">장터 게시판</string>
+    <string name="t_free_board">자유 게시판</string>
 </resources>
