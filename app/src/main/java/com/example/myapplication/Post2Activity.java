@@ -31,10 +31,12 @@ public class Post2Activity extends AppCompatActivity {
     private String Title;
     private String Contents;
     private String nickname;
+    private String postID;
 
     private TextView mTitle;
     private TextView mContents;
     private TextView mNickname;
+    private TextView mPostid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +55,18 @@ public class Post2Activity extends AppCompatActivity {
         mTitle=findViewById(R.id.post2_title);
         mContents=findViewById(R.id.post2_content);
         mNickname=findViewById(R.id.post2_name);
+        mPostid=findViewById(R.id.post2_postid);
 
         Intent intent = getIntent();
 
         Title = intent.getExtras().getString("title");
         Contents = intent.getExtras().getString("contents");
         nickname = intent.getExtras().getString("nickname");
+        postID=intent.getExtras().getString("postID");
 
         mTitle.setText(Title);
         mContents.setText(Contents);
         mNickname.setText(nickname);
+        mPostid.setText(postID);
     }
 }
