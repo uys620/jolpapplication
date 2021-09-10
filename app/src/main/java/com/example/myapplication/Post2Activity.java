@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ import org.w3c.dom.Text;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
+
+import static com.example.myapplication.FirebaseID.postID;
 
 public class Post2Activity extends AppCompatActivity {
 
@@ -37,6 +40,15 @@ public class Post2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post2);
+
+        findViewById(R.id.comment).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(),commentActivity.class);
+                intent.putExtra("postID",getIntent().getExtras().getString("postID"));
+                startActivity(intent);
+            }
+        });
 
         mTitle=findViewById(R.id.post2_title);
         mContents=findViewById(R.id.post2_content);

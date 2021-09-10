@@ -18,24 +18,21 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-public class postActivity extends AppCompatActivity implements View.OnClickListener {
+import static com.example.myapplication.FirebaseID.postID;
+
+public class commentActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     private FirebaseFirestore mStore=FirebaseFirestore.getInstance();
-    private EditText mTitle;
-    private EditText mContents;
     private String nickname;
-
+    private EditText mComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
+        setContentView(R.layout.activity_comment);
 
-        mTitle=findViewById(R.id.post_title_edit);
-        mContents=findViewById(R.id.post_contents_edit);
-
-        findViewById(R.id.post_save_button).setOnClickListener(this);
+        findViewById(R.id.comment_send).setOnClickListener(this);
         if(mAuth.getCurrentUser()!=null){
             mStore.collection(FirebaseID.user).document(mAuth.getCurrentUser().getUid())
                     .get()
@@ -48,21 +45,24 @@ public class postActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
         }
-
     }
+
 
     @Override
     public void onClick(View v) {
         if(mAuth.getCurrentUser()!=null){
-            String postID=mStore.collection(FirebaseID.post).document().getId();
+
+            //String postID=mStore.collection(FirebaseID.post).document().getId();
+            String postID=getIntent().getExtras().getString("postID");
+
+            String commentID=mStore.collection(FirebaseID.post).document(postID).collection(FirebaseID.comment).document().getId();
             Map<String,Object> data=new HashMap<>();
-            data.put(FirebaseID.postID,postID);
             data.put(FirebaseID.documentID,mAuth.getCurrentUser().getUid());
             data.put(FirebaseID.nickname,nickname);
-            data.put(FirebaseID.title,mTitle.getText().toString());
-            data.put(FirebaseID.contents,mContents.getText().toString());
+            data.put(FirebaseID.comment_contents,mComment.getText().toString());
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());
-            mStore.collection(FirebaseID.post).document(postID).set(data, SetOptions.merge());
+            mStore.collection(FirebaseID.post).document(postID).collection(FirebaseID.comment).document(commentID).set(data,SetOptions.merge());
+            //mStore.collection(FirebaseID.post).document("postID").set(data, SetOptions.merge());
             finish();
         }
     }

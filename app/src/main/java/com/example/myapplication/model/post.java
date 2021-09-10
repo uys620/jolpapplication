@@ -12,6 +12,8 @@ public class post {
     private String contents;
     @ServerTimestamp
     private Date date;
+    private String postID;
+
 
     public post() {
     }
@@ -21,8 +23,23 @@ public class post {
         this.nickname=nickname;
         this.title = title;
         this.contents = contents;
+
+    }
+    public post(String documentId, String nickname,String title, String contents,String contentUid) {
+        this.documentId = documentId;
+        this.nickname=nickname;
+        this.title = title;
+        this.contents = contents;
+        this.postID=contentUid;
+
+    }
+    public String getPostID() {
+        return postID;
     }
 
+    public void setPostID(String postID) {
+        this.postID = postID;
+    }
 
     public String getDocumentId() {
         return documentId;

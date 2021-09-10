@@ -11,15 +11,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.FirebaseID;
 import com.example.myapplication.Post2Activity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.post;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
 public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolder> {//리사이클러뷰에서 어댑터는 recyclerview.adapter<사용할 뷰홀더 지정>를 상속해서 구현해야함
 
     private List<post> datas;
+
+    private FirebaseFirestore mStore=FirebaseFirestore.getInstance();
+
 
     public postadapter(List<post> datas) {
         this.datas = datas;
@@ -40,6 +45,8 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
         holder.nickname.setText("작성자:"+data.getNickname());
         holder.title.setText(data.getTitle());
         holder.contents.setText(data.getContents());
+
+
 
     }
 
@@ -76,6 +83,8 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
                         intent.putExtra("nickname",datas.get(pos).getNickname());
                         intent.putExtra("title",datas.get(pos).getTitle());
                         intent.putExtra("contents",datas.get(pos).getContents());
+                        intent.putExtra("postID",datas.get(pos).getPostID());
+
 
                         v.getContext().startActivity(intent);
                     }
