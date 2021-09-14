@@ -41,6 +41,7 @@ public class commentActivity extends AppCompatActivity implements View.OnClickLi
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.getResult()!=null){
                                 nickname=(String)task.getResult().getData().get(FirebaseID.nickname);
+
                             }
                         }
                     });
@@ -52,6 +53,7 @@ public class commentActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(mAuth.getCurrentUser()!=null){
 
+            mComment = findViewById(R.id.comment_message);
             //String postID=mStore.collection(FirebaseID.post).document().getId();
             String postID=getIntent().getExtras().getString("postID");
 
@@ -59,7 +61,7 @@ public class commentActivity extends AppCompatActivity implements View.OnClickLi
             Map<String,Object> data=new HashMap<>();
             data.put(FirebaseID.documentID,mAuth.getCurrentUser().getUid());
             data.put(FirebaseID.nickname,nickname);
-            data.put(FirebaseID.comment_contents,mComment.getText().toString());
+            data.put(FirebaseID.comment_contents,mComment.getText().toString());//안들어감 넣어야함
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());
             mStore.collection(FirebaseID.post).document(postID).collection(FirebaseID.comment).document(commentID).set(data,SetOptions.merge());
             //mStore.collection(FirebaseID.post).document("postID").set(data, SetOptions.merge());

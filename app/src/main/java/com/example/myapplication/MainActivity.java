@@ -90,7 +90,8 @@ public class MainActivity extends AppCompatActivity  {
                             String nickname=String.valueOf(shot.get((FirebaseID.nickname)));
                             String title= String.valueOf(snap.get(FirebaseID.title));
                             String contents=String.valueOf(shot.get(FirebaseID.contents));
-                            post data=new post(documentID,nickname,title,contents);
+                            String postID=String.valueOf(shot.get(FirebaseID.postID));
+                            post data=new post(documentID,nickname,title,contents,postID);
                             mDatas.add(data);
                         }
                             mAdapter=new postadapter(mDatas);//mdatas를 madapter에 저장
