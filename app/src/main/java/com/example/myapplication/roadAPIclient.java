@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,6 +55,8 @@ public class roadAPIclient {
         ArrayList<roadinfo> roadinfoArry = new ArrayList<roadinfo>();
         JSONArray jArry = json.getJSONArray("features");
         String s="LineString";
+
+        JSONArray j;
         for(int i = 0; i < jArry.length(); i++) {
             roadinfo r = new roadinfo();
             String s2=jArry.getJSONObject(i).getJSONObject("geometry").getString("type");
@@ -60,6 +64,11 @@ public class roadAPIclient {
                 r.setLinkname(jArry.getJSONObject(i).getJSONObject("properties").getString("id"));
                 r.setTime(jArry.getJSONObject(i).getJSONObject("properties").getDouble("time"));
                 r.setIndex(jArry.getJSONObject(i).getJSONObject("properties").getInt("index"));
+                j=jArry.getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates");
+                r.setStart_latitude((double)j.getJSONArray(0).get(1));
+                r.setStart_longitude((double)j.getJSONArray(0).get(0));
+                r.setFinal_latitude((double)j.getJSONArray(-1).get(1));
+                r.setFinal_longitude((double)j.getJSONArray(-1).get(0));
                 roadinfoArry.add(r);
             }
 

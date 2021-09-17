@@ -36,6 +36,7 @@ public class searchpoint {
     }
 
 
+
     public double getLongitude() {
         return longitude;
     }

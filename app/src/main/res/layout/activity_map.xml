@@ -83,6 +83,13 @@
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
             android:text="길 검색" />
+
+        <Button
+            android:id="@+id/a_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="A*으로 검색" />
     </LinearLayout>
 
     <LinearLayout

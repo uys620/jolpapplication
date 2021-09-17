@@ -51,6 +51,9 @@ public class MapActivity extends Activity{
         EditText SearchStart = findViewById(R.id.SearchStart_text);
         EditText SearchDest = findViewById(R.id.SearchDest_text);
         Button roadSearchBtn = findViewById(R.id.roadSearch_btn);
+
+        Button a_star=findViewById(R.id.a_star);
+
         Button Searchbtn = findViewById(R.id.Search_btn);
         String SearchString = getIntent().getExtras().getString("SearchText"),
                 SearchStartString = getIntent().getExtras().getString("SearchStartText"),
@@ -163,6 +166,106 @@ public class MapActivity extends Activity{
 
                   //  System.out.println("위도 경도:" + startP.getLatitude() + "," + startP.getLongitude());
                    // System.out.println("위도 경도:" + destP.getLatitude() + "," + destP.getLongitude());
+
+
+                }
+            }
+        });
+
+
+
+        a_star.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+
+                /*if(flag != 2){
+                    // 도착지와 출발지를 입력해 주세요. 오류 메세지.
+                    Toast.makeText(MapActivity.this, "출발지와 도착지를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                }
+                else*/{
+                    tmapdata.findTitlePOI(SearchStartString, new TMapData.FindTitlePOIListenerCallback() {
+                        @Override
+                        public void onFindTitlePOI(ArrayList poiItem) {
+                            TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
+                            TMapMarkerItem markerItem1 = new TMapMarkerItem();
+                            TMapPoint tMapPoint1 = new TMapPoint(0, 0);
+                            startP.setLatitude(item.getPOIPoint().getLatitude());
+                            startP.setLongitude(item.getPOIPoint().getLongitude());
+
+                        }
+                    });
+
+                    tmapdata.findTitlePOI(SearchDestString, new TMapData.FindTitlePOIListenerCallback() {
+                        @Override
+                        public void onFindTitlePOI(ArrayList poiItem) {
+                            TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
+                            TMapMarkerItem markerItem1 = new TMapMarkerItem();
+
+                            markerItem1.setPosition(0.5f, 1.0f);
+                            TMapPoint tMapPoint1 = new TMapPoint(0, 0);
+
+                            destP.setLatitude(item.getPOIPoint().getLatitude());
+                            destP.setLongitude(item.getPOIPoint().getLongitude());
+
+                        }
+                    });
+
+
+                    // a*여기부터 작성
+                    openroadapitask t=new openroadapitask();
+
+
+                    try{
+                        ArrayList<roadinfo> roadinfoArry = t.execute().get();
+                        //Graph g= new Graph();
+                        a_star a=new a_star();
+                        //g.input(roadinfoArry);
+                        a.input(roadinfoArry);
+                        //System.out.println(startP.getMin_Value());
+                        //System.out.println("시작노드, 도착노드:" + startP.getMin_Value() + "," + destP.getMin_Value());
+                        //List<Integer> route = g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
+
+                        List<Integer> route = a.a_star(roadinfoArry, a.nearid(roadinfoArry,startP),a.nearid(roadinfoArry,destP) );
+
+                        //List<Integer> route = g.dijkstra(1,31);
+                        //System.out.println(route.size() + ",");
+
+                        ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
+                        for(int i = 0; i < route.size(); i++){
+                            searchpoint s = new searchpoint(0,0);
+                            System.out.println("받고자하는것:" + s.getX(route.get(i)) + "," + s.getY(route.get(i)));
+                            alTMapPoint.add( new TMapPoint( s.getX(route.get(i)), s.getY(route.get(i))) );
+                        }
+
+
+                        {
+                            TMapPolyLine tMapPolyLine = new TMapPolyLine();
+                            tMapPolyLine.setLineColor(Color.BLUE);
+                            tMapPolyLine.setLineWidth(2);
+
+                            for (int i = 0; i < alTMapPoint.size(); i++) {
+                                tMapPolyLine.addLinePoint(alTMapPoint.get(i));
+                            }
+                            tmapview.addTMapPolyLine("Line1", tMapPolyLine);
+                        }
+
+
+//            for(int i = 0; i < roadinfoArry.size(); i++) {
+//                if(roadinfoArry.get(i).getLinkid()==1024741){
+//                    g.input(roadinfoArry);
+//                }
+//
+//                System.out.println("받고자하는것:" + roadinfoArry.get(i).getLinkname());
+//            }
+                    }catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    //  System.out.println("위도 경도:" + startP.getLatitude() + "," + startP.getLongitude());
+                    // System.out.println("위도 경도:" + destP.getLatitude() + "," + destP.getLongitude());
 
 
                 }
