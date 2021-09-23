@@ -12,9 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".My_Reply"></activity>
-        <activity android:name=".My_Post" />
-        <activity android:name=".FrontPageActivity" />
+        <activity android:name=".My_Reply"
+            android:launchMode="singleTop"></activity>
+        <activity android:name=".My_Post"
+            android:launchMode="singleTop"/>
+        <activity android:name=".FrontPageActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Post2Activity"
             android:launchMode="singleTop" />
@@ -25,8 +28,10 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".commentActivity"/>
-        <activity android:name=".signupActivity" />
+        <activity android:name=".commentActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".signupActivity"
+            android:launchMode="singleTop"/>
         <activity android:name=".LoginActivity">
 
             <intent-filter>

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.myapplication.adapters.postadapter;
 import com.example.myapplication.model.post;
@@ -39,7 +40,7 @@ public class My_Reply extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__reply);
 
-        mPostRecyclerView=findViewById(R.id.main_recyclerview);
+        mPostRecyclerView=findViewById(R.id.main_recyclerview2);
     }
 
     @Override
@@ -64,6 +65,7 @@ public class My_Reply extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             DocumentSnapshot document = task.getResult();
                                             if (document.exists()) {
+                                                Log.d("테스트","검색");
                                                 String documentID=String.valueOf(document.get(FirebaseID.documentID));//key:String에 해당하는 Object를 가져와서 스트링으로 바꿔서 사용
                                                 String nickname=String.valueOf(document.get((FirebaseID.nickname)));
                                                 String title= String.valueOf(document.get(FirebaseID.title));
@@ -76,11 +78,11 @@ public class My_Reply extends AppCompatActivity {
                                         } else {
                                             //Log.d(TAG, "get failed with ", task.getException());
                                         }
+                                        mAdapter=new postadapter(mDatas);//mdatas를 madapter에 저장
+                                        mPostRecyclerView.setAdapter(mAdapter);
                                     }
                                 });
                             }
-                            mAdapter=new postadapter(mDatas);//mdatas를 madapter에 저장
-                            mPostRecyclerView.setAdapter(mAdapter);
                         }
                     }
                 });

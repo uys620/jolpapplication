@@ -68,7 +68,7 @@ public class commentActivity extends AppCompatActivity implements View.OnClickLi
 
             String commentID2=mStore.collection(FirebaseID.user).document(mAuth.getCurrentUser().getUid()).collection(FirebaseID.comment).document().getId();
             Map<String,Object> data2=new HashMap<>();
-            data.put(FirebaseID.postID,postID);
+            data2.put(FirebaseID.postID,postID);
             mStore.collection(FirebaseID.user).document(mAuth.getCurrentUser().getUid()).collection(FirebaseID.comment).document(commentID2).set(data2,SetOptions.merge());
             finish();
 
