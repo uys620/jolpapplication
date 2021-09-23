@@ -217,17 +217,17 @@ public class MapActivity extends Activity{
 
                     try{
                         ArrayList<roadinfo> roadinfoArry = t.execute().get();
-                        //Graph g= new Graph();
-                        a_star a=new a_star();
-                        //g.input(roadinfoArry);
-                        a.input(roadinfoArry);
+                        Graph g= new Graph();
+                        //a_star a=new a_star();
+                        g.input(roadinfoArry);
+                        //a.input(roadinfoArry);
                         //System.out.println(startP.getMin_Value());
                         //System.out.println("시작노드, 도착노드:" + startP.getMin_Value() + "," + destP.getMin_Value());
                         //List<Integer> route = g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
 
-                        List<Integer> route = a.a_star(roadinfoArry, a.nearid(roadinfoArry,startP),a.nearid(roadinfoArry,destP) );
+                        //List<Integer> route = a.a_star(roadinfoArry, a.nearid(roadinfoArry,startP),a.nearid(roadinfoArry,destP) );
 
-                        //List<Integer> route = g.dijkstra(1,31);
+                        List<Integer> route = g.dijkstra(1,31);
                         //System.out.println(route.size() + ",");
 
                         ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();

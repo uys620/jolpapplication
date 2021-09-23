@@ -29,6 +29,7 @@ public class FrontPageActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),My_Post.class));
                         break;
                     case R.id.my_reply:
+                        startActivity(new Intent(getApplicationContext(),My_Reply.class));
                         break;
                     case R.id.free_board:
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));

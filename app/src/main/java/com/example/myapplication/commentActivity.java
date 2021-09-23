@@ -65,7 +65,13 @@ public class commentActivity extends AppCompatActivity implements View.OnClickLi
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());
             mStore.collection(FirebaseID.post).document(postID).collection(FirebaseID.comment).document(commentID).set(data,SetOptions.merge());
             //mStore.collection(FirebaseID.post).document("postID").set(data, SetOptions.merge());
+
+            String commentID2=mStore.collection(FirebaseID.user).document(postID).collection(FirebaseID.comment).document().getId();
+            Map<String,Object> data2=new HashMap<>();
+            data.put(FirebaseID.postID,postID);
+            mStore.collection(FirebaseID.user).document(mAuth.getCurrentUser().getUid()).collection(FirebaseID.comment).document(commentID2).set(data2,SetOptions.merge());
             finish();
+
         }
     }
 }
