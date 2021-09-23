@@ -38,6 +38,8 @@ public class My_Reply extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__reply);
+
+        mPostRecyclerView=findViewById(R.id.main_recyclerview);
     }
 
     @Override
@@ -76,7 +78,6 @@ public class My_Reply extends AppCompatActivity {
                                         }
                                     }
                                 });
-
                             }
                             mAdapter=new postadapter(mDatas);//mdatas를 madapter에 저장
                             mPostRecyclerView.setAdapter(mAdapter);
