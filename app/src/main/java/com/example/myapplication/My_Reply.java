@@ -80,6 +80,7 @@ public class My_Reply extends AppCompatActivity {
                                         }
                                         mAdapter=new postadapter(mDatas);//mdatas를 madapter에 저장
                                         mPostRecyclerView.setAdapter(mAdapter);
+
                                     }
                                 });
                             }
