@@ -61,14 +61,14 @@ public class roadAPIclient {
             roadinfo r = new roadinfo();
             String s2=jArry.getJSONObject(i).getJSONObject("geometry").getString("type");
             if(s2.equals(s)){
-                r.setLinkname(jArry.getJSONObject(i).getJSONObject("properties").getString("id"));
+                r.setLinkname(jArry.getJSONObject(i).getJSONObject("properties").getInt("id"));
                 r.setTime(jArry.getJSONObject(i).getJSONObject("properties").getDouble("time"));
                 r.setIndex(jArry.getJSONObject(i).getJSONObject("properties").getInt("index"));
                 j=jArry.getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates");
                 r.setStart_latitude((double)j.getJSONArray(0).get(1));
                 r.setStart_longitude((double)j.getJSONArray(0).get(0));
-                r.setFinal_latitude((double)j.getJSONArray(-1).get(1));
-                r.setFinal_longitude((double)j.getJSONArray(-1).get(0));
+                r.setFinal_latitude((double)j.getJSONArray(j.length()-1).get(1));//-1말고 끝부분찾아야함
+                r.setFinal_longitude((double)j.getJSONArray(j.length()-1).get(0));
                 roadinfoArry.add(r);
             }
 

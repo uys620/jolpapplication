@@ -217,24 +217,27 @@ public class MapActivity extends Activity{
 
                     try{
                         ArrayList<roadinfo> roadinfoArry = t.execute().get();
-                        Graph g= new Graph();
-                        //a_star a=new a_star();
-                        g.input(roadinfoArry);
-                        //a.input(roadinfoArry);
+                        //Graph g= new Graph();
+                        a_star a=new a_star();
+                        //g.input(roadinfoArry);
+                        a.input(roadinfoArry);
                         //System.out.println(startP.getMin_Value());
                         //System.out.println("시작노드, 도착노드:" + startP.getMin_Value() + "," + destP.getMin_Value());
                         //List<Integer> route = g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
+                        int startid=a.nearid(startP);
+                        int destid=a.nearid(destP);
+                        System.out.println("시작링크 id "+startid);
+                        System.out.println("끝링크 id "+destid);
+                        List<roadinfo> route = a.a_star_algorhitm(roadinfoArry, startid,destid);
 
-                        //List<Integer> route = a.a_star(roadinfoArry, a.nearid(roadinfoArry,startP),a.nearid(roadinfoArry,destP) );
-
-                        List<Integer> route = g.dijkstra(1,31);
+                        //List<Integer> route = g.dijkstra(1,31);
                         //System.out.println(route.size() + ",");
 
                         ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
                         for(int i = 0; i < route.size(); i++){
-                            searchpoint s = new searchpoint(0,0);
-                            System.out.println("받고자하는것:" + s.getX(route.get(i)) + "," + s.getY(route.get(i)));
-                            alTMapPoint.add( new TMapPoint( s.getX(route.get(i)), s.getY(route.get(i))) );
+                            //searchpoint s = new searchpoint(0,0);
+                            //System.out.println("받고자하는것:" + s.getX(route.get(i)) + "," + s.getY(route.get(i)));
+                            alTMapPoint.add( new TMapPoint(route.get(i).getStart_latitude(),route.get(i).getStart_longitude()));
                         }
 
 

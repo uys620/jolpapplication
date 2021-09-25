@@ -5,7 +5,7 @@ import java.util.List;
 public class roadinfo {
     double time;
     int linkid;
-    String linkname;
+    int linkname;
     String type;
     double start_latitude;
     double start_longitude;
@@ -55,11 +55,11 @@ public class roadinfo {
         this.linkid = linkid;
     }
 
-    public String getLinkname() {
+    public int getLinkname() {
         return linkname;
     }
 
-    public void setLinkname(String linkname) {
+    public void setLinkname(int linkname) {
         this.linkname = linkname;
     }
 

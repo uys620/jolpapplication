@@ -58,7 +58,7 @@ public class Graph {
             for(j=0;j<n+1;j++){
                 if(maps[i][j]!=0){
                     for(int x=0; x<r.size(); x++){
-                        if(Integer.parseInt(r.get(x).getLinkname()) == maps[i][j]){
+                        if(r.get(x).getLinkname() == maps[i][j]){
                         maps[i][j]=r.get(x).getTime();
                         }
                     }
