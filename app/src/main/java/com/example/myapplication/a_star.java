@@ -72,7 +72,7 @@ public class a_star {
                     }
                     if(check==0){
                         temp=R.get(i);
-                        System.out.println(temp.getLinkid());
+                        System.out.println(temp.getLinkname());
                         road_closers.add(temp);
                     }
                     //System.out.println("반복중if내");
@@ -80,12 +80,17 @@ public class a_star {
                 //System.out.println("반복중if외부");
                 check=0;
             }//범위 내인 도로 road_closer 리스트에 전부 있음
+            if(road_closers.size()==0){
+                System.out.println("최단거리 찾기 실패");
+                break;
+            }
+
             roadinfo shortest=road_closers.get(0);
             System.out.println("반복1끝~~~~~~~~~~~~~~~~~~~~~~~"+road_closers.size());
             for(int m=0;m<road_closers.size();m++)
-                System.out.println("closers id"+road_closers.get(m).getLinkid());
+                System.out.println("closers id"+road_closers.get(m).getLinkname());
             for(int j=0;j<road_closers.size();j++){//time+거리/속도(속도정하기,좌표기준으로 정해야하는데 흐음...)
-                if((shortest.getTime()+((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getStart_longitude())*(end_link.getStart_longitude()-shortest.getStart_longitude()))/60)>(road_closers.get(j).getTime()+((end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude()))/60)){//60말고 적당한값 찾기
+                if((shortest.getTime()+Math.sqrt((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getStart_longitude())*(end_link.getStart_longitude()-shortest.getStart_longitude()))/0.00015841755)>(road_closers.get(j).getTime()+Math.sqrt((end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude()))/0.00015841755)){//60말고 적당한값 찾기
                     shortest=road_closers.get(j);
                     //System.out.println("반복중if내");
                 }
@@ -93,10 +98,13 @@ public class a_star {
             }
             //System.out.println("반복2끝");
             road_closers.clear();
-            for(int l=0;l<answer.size();l++)
-                System.out.println("answer id"+answer.get(l).getLinkid());
+            //System.out.println("answer id2"+answer.get(0).getLinkname());
+
             answer.add(shortest);
+            for(int l=0;l<answer.size();l++)
+                System.out.println("answer id"+answer.get(l).getLinkname());
             start_link=shortest;
+            System.out.println("start_link id"+start_link.getLinkname());
             count++;
 
         //1)startid에 맞는 링크가 몇번째(i)인지 찾기(for루프 한번)
