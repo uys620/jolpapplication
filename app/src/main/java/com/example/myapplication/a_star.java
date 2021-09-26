@@ -30,8 +30,9 @@ public class a_star {
         roadinfo start_link = null;
         roadinfo end_link = null;
         int count=0;
-
+        roadinfo temp;
         List<roadinfo> answer=new ArrayList<roadinfo>();
+        List<roadinfo> road_closers=new ArrayList<roadinfo>();
         System.out.println("알고리즘 시작");
 
         for(int i=0;i<R.size();i++){
@@ -45,7 +46,8 @@ public class a_star {
         System.out.println("시작링크 검색완료"+ start_link.getLinkname());
 
         answer.add(start_link);
-        System.out.println("시작링크 포함완료");
+        System.out.println("시작링크 포함확인"+ answer.get(0).getLinkname());
+        //System.out.println("시작링크 포함완료");문제없음
         for(int i=0;i<R.size();i++){
             if(R.get(i).getLinkname()==destid){
                 end_link=R.get(i);
@@ -54,17 +56,34 @@ public class a_star {
             }
         }
         System.out.println("도착링크 검색완료"+end_link.getLinkname());
+        //System.out.println("Rsize"+R.size()); 문제없음
+
         while(start_link!=end_link){//start_link를 바꿔가면서 끝으로 갈것..
-            List<roadinfo> road_closers=new ArrayList<roadinfo>();
+
+
+            int check=0;
             for(int i=0;i<R.size();i++){
                 if(((R.get(i).getStart_longitude()-start_link.getFinal_longitude())*(R.get(i).getStart_longitude()-start_link.getFinal_longitude())+(R.get(i).getStart_latitude()-start_link.getFinal_latitude())*(R.get(i).getStart_latitude()-start_link.getFinal_latitude()))<0.00000034) {//300말고 적당한값  찾기
-                    road_closers.add(R.get(i));
+                    for(int k=0;k<answer.size();k++){
+                        if(R.get(i).getLinkname()%2==1&&R.get(i).getLinkname()+1==answer.get(k).getLinkname())//이부분 바꿔야함 홀수짝수일때 나눠서
+                            check++;
+                        else if(R.get(i).getLinkname()%2==0&&R.get(i).getLinkname()-1==answer.get(k).getLinkname())
+                            check++;
+                    }
+                    if(check==0){
+                        temp=R.get(i);
+                        System.out.println(temp.getLinkid());
+                        road_closers.add(temp);
+                    }
                     //System.out.println("반복중if내");
                 }
                 //System.out.println("반복중if외부");
+                check=0;
             }//범위 내인 도로 road_closer 리스트에 전부 있음
             roadinfo shortest=road_closers.get(0);
             System.out.println("반복1끝~~~~~~~~~~~~~~~~~~~~~~~"+road_closers.size());
+            for(int m=0;m<road_closers.size();m++)
+                System.out.println("closers id"+road_closers.get(m).getLinkid());
             for(int j=0;j<road_closers.size();j++){//time+거리/속도(속도정하기,좌표기준으로 정해야하는데 흐음...)
                 if((shortest.getTime()+((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getStart_longitude())*(end_link.getStart_longitude()-shortest.getStart_longitude()))/60)>(road_closers.get(j).getTime()+((end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude()))/60)){//60말고 적당한값 찾기
                     shortest=road_closers.get(j);
@@ -74,7 +93,8 @@ public class a_star {
             }
             //System.out.println("반복2끝");
             road_closers.clear();
-            System.out.println(road_closers.size());
+            for(int l=0;l<answer.size();l++)
+                System.out.println("answer id"+answer.get(l).getLinkid());
             answer.add(shortest);
             start_link=shortest;
             count++;
