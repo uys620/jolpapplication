@@ -84,13 +84,20 @@ public class a_star {
                 System.out.println("최단거리 찾기 실패");
                 break;
             }
+            for(int o=0;o<road_closers.size();o++){
+                if(road_closers.get(o).getLinkname()==end_link.getLinkname()){
+                    answer.add(road_closers.get(o));
+                    return answer;
+                }
+            }
 
             roadinfo shortest=road_closers.get(0);
             System.out.println("반복1끝~~~~~~~~~~~~~~~~~~~~~~~"+road_closers.size());
             for(int m=0;m<road_closers.size();m++)
                 System.out.println("closers id"+road_closers.get(m).getLinkname());
             for(int j=0;j<road_closers.size();j++){//time+거리/속도(속도정하기,좌표기준으로 정해야하는데 흐음...)
-                if((shortest.getTime()+Math.sqrt((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getStart_longitude())*(end_link.getStart_longitude()-shortest.getStart_longitude()))/0.00015841755)>(road_closers.get(j).getTime()+Math.sqrt((end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude()))/0.00015841755)){//60말고 적당한값 찾기
+                //if((shortest.getTime()+Math.sqrt((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getStart_longitude())*(end_link.getStart_longitude()-shortest.getStart_longitude()))/0.00015841755)>(road_closers.get(j).getTime()+Math.sqrt((end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude()))/0.00015841755)){//60말고 적당한값 찾기
+                if((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getStart_longitude())*(end_link.getStart_longitude()-shortest.getStart_longitude())>(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())){
                     shortest=road_closers.get(j);
                     //System.out.println("반복중if내");
                 }

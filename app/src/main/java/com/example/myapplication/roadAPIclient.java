@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 
 public class roadAPIclient {
-    final static String roadAPIURL="https://apis.openapi.sk.com/tmap/traffic?version=1.67&reqCoordType=WGS84GEO&resCoordType=WGS84GEO&trafficType=AUTO&zoomLevel=17&callback=application/json&appKey=l7xx2949b2e5de904dcaa74e3ffcdbe29864&centerLat=37.504500&centerLon=127.049000";
+    final static String roadAPIURL="https://apis.openapi.sk.com/tmap/traffic?version=1.67&reqCoordType=WGS84GEO&resCoordType=WGS84GEO&trafficType=AUTO&zoomLevel=14&callback=application/json&appKey=l7xx2949b2e5de904dcaa74e3ffcdbe29864&centerLat=37.504500&centerLon=127.049000";
     public ArrayList<roadinfo> getroadinfo(){
         ArrayList<roadinfo> roadinfoArry = new ArrayList<roadinfo>();
         roadinfo r=new roadinfo();
