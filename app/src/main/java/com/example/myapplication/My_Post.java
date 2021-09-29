@@ -63,7 +63,6 @@ public class My_Post extends AppCompatActivity {
                                     post data=new post(documentID,nickname,title,contents,postID);
                                     mDatas.add(data);
                                 }
-
                             }
 
                             mAdapter=new postadapter(mDatas);//mdatas를 madapter에 저장
