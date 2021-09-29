@@ -33,9 +33,6 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {//3가지 메서드 onCreateViewholder 뷰홀더를 생성(레이아웃 생성)
-
-
-
         return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post,parent,false));//layoutinflator: 특정 xml파일을 클래스로 변환하게 도와줌
     }
 
@@ -79,7 +76,6 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION)
                     {
-                        Log.d("테스트","클릭");
                         post Post = datas.get(pos);
                         Intent intent = new Intent(v.getContext(), Post2Activity.class);
 
