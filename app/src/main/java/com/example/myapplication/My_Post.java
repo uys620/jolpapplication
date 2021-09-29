@@ -57,9 +57,10 @@ public class My_Post extends AppCompatActivity {
                                 String nickname=String.valueOf(shot.get((FirebaseID.nickname)));
                                 String title= String.valueOf(snap.get(FirebaseID.title));
                                 String contents=String.valueOf(shot.get(FirebaseID.contents));
+                                String postID=String.valueOf(shot.get(FirebaseID.postID));
                                 if(documentID.equals(mAuth.getCurrentUser().getUid())) // 현재 유저 아이디와 도큐먼트 아이디가 같으면 동일인이 쓴 글
                                 {
-                                    post data = new post(documentID, nickname, title, contents);
+                                    post data=new post(documentID,nickname,title,contents,postID);
                                     mDatas.add(data);
                                 }
 
