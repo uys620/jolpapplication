@@ -78,7 +78,7 @@ public class Post2Activity extends AppCompatActivity {
         Title = intent.getExtras().getString("title");
         Contents = intent.getExtras().getString("contents");
         nickname = intent.getExtras().getString("nickname");
-        postID=intent.getExtras().getString("postID");
+        postID= intent.getExtras().getString("postID");
 
         mTitle.setText(Title);
         mContents.setText(Contents);

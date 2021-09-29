@@ -65,12 +65,12 @@ public class My_Reply extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             DocumentSnapshot document = task.getResult();
                                             if (document.exists()) {
-                                                Log.d("테스트","검색");
                                                 String documentID=String.valueOf(document.get(FirebaseID.documentID));//key:String에 해당하는 Object를 가져와서 스트링으로 바꿔서 사용
                                                 String nickname=String.valueOf(document.get((FirebaseID.nickname)));
                                                 String title= String.valueOf(document.get(FirebaseID.title));
                                                 String contents=String.valueOf(document.get(FirebaseID.contents));
-                                                post data = new post(documentID, nickname, title, contents);
+                                                String postID=String.valueOf(shot.get(FirebaseID.postID));
+                                                post data=new post(documentID,nickname,title,contents,postID);
                                                 mDatas.add(data);
                                             } else {
 
@@ -80,8 +80,6 @@ public class My_Reply extends AppCompatActivity {
                                         }
                                         mAdapter=new postadapter(mDatas);//mdatas를 madapter에 저장
                                         mPostRecyclerView.setAdapter(mAdapter);
-
-
                                     }
                                 });
                             }
