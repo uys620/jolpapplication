@@ -2,15 +2,19 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.adapters.commentadapter;
 import com.example.myapplication.adapters.postadapter;
@@ -34,6 +38,7 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import static com.example.myapplication.FirebaseID.documentID;
 import static com.example.myapplication.FirebaseID.postID;
 
 public class Post2Activity extends AppCompatActivity {
@@ -44,6 +49,7 @@ public class Post2Activity extends AppCompatActivity {
     private String Contents;
     private String nickname;
     private String postID;
+    private String documentId;
 
     private TextView mTitle;
     private TextView mContents;
@@ -52,12 +58,74 @@ public class Post2Activity extends AppCompatActivity {
     private RecyclerView CommentRecyclerView;
     private List<comment> cDatas;
     private commentadapter cAdapter;
+    private Button edit_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post2);
         CommentRecyclerView = findViewById(R.id.comment_view);
+        edit_button = findViewById(R.id.edit_button);
+
+        edit_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(mAuth.getCurrentUser().getUid().equals(documentId)){
+                    my_post();
+                }
+                else{
+                    other_post();
+                }
+            }
+
+            void my_post(){
+
+                final CharSequence[] items = {"수정", "삭제" , "취소"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(Post2Activity.this);
+                builder.setTitle("추가기능");
+                builder.setItems(items, new DialogInterface.OnClickListener()  {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch(which) {
+                            case 0:
+                                Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                            case 1:
+                                Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                            case 2:
+                                Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+
+            void other_post(){
+
+                final CharSequence[] items = {"쪽지 보내기", "신고" , "취소"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(Post2Activity.this);
+
+                builder.setTitle("추가기능");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch(which) {
+                            case 0:
+                                Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                            case 1:
+                                Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                            case 2:
+                                Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+
+        });
+
+
 
         findViewById(R.id.comment).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -79,6 +147,7 @@ public class Post2Activity extends AppCompatActivity {
         Contents = intent.getExtras().getString("contents");
         nickname = intent.getExtras().getString("nickname");
         postID= intent.getExtras().getString("postID");
+        documentId = intent.getExtras().getString("documentId");
 
         mTitle.setText(Title);
         mContents.setText(Contents);
@@ -108,4 +177,6 @@ public class Post2Activity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

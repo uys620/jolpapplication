@@ -83,6 +83,7 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
                         intent.putExtra("title",datas.get(pos).getTitle());
                         intent.putExtra("contents",datas.get(pos).getContents());
                         intent.putExtra("postID",datas.get(pos).getPostID());
+                        intent.putExtra("documentId",datas.get(pos).getDocumentId());
 
 
                         v.getContext().startActivity(intent);
