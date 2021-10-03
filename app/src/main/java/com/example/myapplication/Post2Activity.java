@@ -136,11 +136,17 @@ public class Post2Activity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch(which) {
                             case 0:
+                                Intent intent = new Intent(getApplicationContext(),dmActivity.class);
+                                intent.putExtra("documentId",documentId);
+                                startActivity(intent);
                                 Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                                break;
                             case 1:
                                 Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                                break;
                             case 2:
                                 Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                                break;
                         }
                     }
                 });

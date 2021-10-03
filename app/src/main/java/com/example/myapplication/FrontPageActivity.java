@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class FrontPageActivity extends AppCompatActivity {
 
-    Button my_post, my_reply, free_board, market_board;
+    Button my_post, my_reply, free_board, market_board, my_dm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class FrontPageActivity extends AppCompatActivity {
         my_reply = findViewById(R.id.my_reply);
         free_board = findViewById(R.id.free_board);
         market_board = findViewById(R.id.market_board);
+        my_dm = findViewById(R.id.my_dm);
 
         View.OnClickListener onClickListener = new View.OnClickListener(){
             @Override
@@ -36,6 +38,9 @@ public class FrontPageActivity extends AppCompatActivity {
                         break;
                     case R.id.market_board:
                         break;
+                    case R.id.my_dm:
+                        startActivity(new Intent(getApplicationContext(),My_DM.class));
+                        break;
                 }
             }
         };
@@ -44,5 +49,6 @@ public class FrontPageActivity extends AppCompatActivity {
         my_reply.setOnClickListener(onClickListener);
         free_board.setOnClickListener(onClickListener);
         market_board.setOnClickListener(onClickListener);
+        my_dm.setOnClickListener(onClickListener);
     }
 }
