@@ -43,7 +43,15 @@ public class MainActivity extends AppCompatActivity  {
 
         mPostRecyclerView=findViewById(R.id.main_recyclerview);
 
-        findViewById(R.id.main_post_edit).setOnClickListener(new View.OnClickListener(){
+        findViewById(R.id.main_page).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(),FrontPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.write_post).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(getApplicationContext(),postActivity.class);

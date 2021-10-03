@@ -21,6 +21,8 @@ import com.example.myapplication.adapters.postadapter;
 import com.example.myapplication.model.comment;
 import com.example.myapplication.model.post;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -90,12 +92,32 @@ public class Post2Activity extends AppCompatActivity {
                             case 0:
                                 Intent intent = new Intent(getApplicationContext(),PostEditActivity.class);
                                 intent.putExtra("contents",Contents);
+                                intent.putExtra("postId",postID);
                                 startActivity(intent);
                                 Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                                break;
+
                             case 1:
+                                mStore.collection(FirebaseID.post).document(postID)
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("삭제성공", "DocumentSnapshot successfully deleted!");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("삭제실패", "Error deleting document", e);
+                                            }
+                                        });
                                 Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                                break;
+
                             case 2:
                                 Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
+                                break;
                         }
                     }
                 });

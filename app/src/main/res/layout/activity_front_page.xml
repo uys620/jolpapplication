@@ -30,6 +30,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tmy_reply" />
+
+            <Button
+                android:id="@+id/my_dm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="내게 온 쪽지" />
         </LinearLayout>
 
         <LinearLayout
