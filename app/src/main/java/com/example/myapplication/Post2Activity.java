@@ -88,6 +88,9 @@ public class Post2Activity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch(which) {
                             case 0:
+                                Intent intent = new Intent(getApplicationContext(),PostEditActivity.class);
+                                intent.putExtra("contents",Contents);
+                                startActivity(intent);
                                 Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
                             case 1:
                                 Toast.makeText(getApplicationContext(),items[which] + "선택", Toast.LENGTH_SHORT).show();
@@ -139,7 +142,6 @@ public class Post2Activity extends AppCompatActivity {
         mTitle=findViewById(R.id.post2_title);
         mContents=findViewById(R.id.post2_content);
         mNickname=findViewById(R.id.post2_name);
-        mPostid=findViewById(R.id.post2_postid);
 
         Intent intent = getIntent();
 
@@ -152,7 +154,6 @@ public class Post2Activity extends AppCompatActivity {
         mTitle.setText(Title);
         mContents.setText(Contents);
         mNickname.setText(nickname);
-        mPostid.setText(postID);
 
         cDatas=new ArrayList<>();
         mStore.collection(FirebaseID.post)//파이어스토어에서 post로 되어있는 collectionreference 만들기

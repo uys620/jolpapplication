@@ -42,7 +42,6 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
         holder.nickname.setText("작성자:"+data.getNickname());
         holder.title.setText(data.getTitle());
         holder.contents.setText(data.getContents());
-        holder.postID.setText(data.getPostID());
 
 
 
@@ -66,7 +65,6 @@ public class postadapter extends  RecyclerView.Adapter<postadapter.PostViewHolde
             nickname=itemView.findViewById(R.id.item_post_nickname);
             title=itemView.findViewById(R.id.item_post_title);
             contents=itemView.findViewById(R.id.item_post_contents);
-            postID=itemView.findViewById(R.id.item_post_id);
 
             itemView.setOnClickListener(new View.OnClickListener()
             {

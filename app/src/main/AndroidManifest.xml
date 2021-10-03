@@ -28,6 +28,9 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".PostEditActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".commentActivity"
             android:launchMode="singleTop"/>
         <activity android:name=".signupActivity"
