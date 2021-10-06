@@ -335,7 +335,7 @@ public class MapActivity extends Activity{
         tmapview.setSKTMapApiKey("l7xx2949b2e5de904dcaa74e3ffcdbe29864");
         tmapview.setCompassMode(true);
         tmapview.setIconVisibility(true);
-        tmapview.setZoomLevel(14);
+        tmapview.setZoomLevel(13);
         tmapview.setMapType(TMapView.MAPTYPE_STANDARD);
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
         tmapview.setTrackingMode(false);

@@ -84,11 +84,26 @@ public class a_star {
                 System.out.println("최단거리 찾기 실패");
                 break;
             }
+            if(answer.size()>50){
+                answer.add(end_link);
+                return answer;
+            }
+
             for(int o=0;o<road_closers.size();o++){
                 if(road_closers.get(o).getLinkname()==end_link.getLinkname()){
                     answer.add(road_closers.get(o));
                     return answer;
                 }
+                else if(road_closers.get(o).getLinkname()%2==1&&road_closers.get(o).getLinkname()+1==end_link.getLinkname()){
+                    answer.add(end_link);
+                    return answer;
+                }
+                else if(road_closers.get(o).getLinkname()%2==0&&road_closers.get(o).getLinkname()-1==end_link.getLinkname()){
+                    answer.add(end_link);
+                    return answer;
+                }
+
+
             }
 
             roadinfo shortest=road_closers.get(0);
@@ -97,7 +112,10 @@ public class a_star {
                 System.out.println("closers id"+road_closers.get(m).getLinkname());
             for(int j=0;j<road_closers.size();j++){//time+거리/속도(속도정하기,좌표기준으로 정해야하는데 흐음...)
                 //if((shortest.getTime()+Math.sqrt((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getStart_longitude())*(end_link.getStart_longitude()-shortest.getStart_longitude()))/0.00015841755)>(road_closers.get(j).getTime()+Math.sqrt((end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude()))/0.00015841755)){//60말고 적당한값 찾기
-                if((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getStart_longitude())*(end_link.getStart_longitude()-shortest.getStart_longitude())>(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getStart_longitude())){
+                System.out.println("j가 먼지"+road_closers.get(j).getLinkname()+"쇼티스트 거리결과"+((100000*end_link.getStart_latitude()-100000*shortest.getFinal_latitude())*(100000*end_link.getStart_latitude()-100000*shortest.getFinal_latitude())+(100000*end_link.getStart_longitude()-100000*shortest.getStart_longitude())*(100000*end_link.getStart_longitude()-100000*shortest.getStart_longitude()))+"j번째거 거리결과"+((100000*end_link.getStart_latitude()-100000*road_closers.get(j).getFinal_latitude())*(100000*end_link.getStart_latitude()-100000*road_closers.get(j).getFinal_latitude())+(100000*end_link.getStart_longitude()-100000*road_closers.get(j).getStart_longitude())*(100000*end_link.getStart_longitude()-100000*road_closers.get(j).getStart_longitude())));
+                System.out.println("마지막좌표 lat"+end_link.getStart_latitude()+"마지막좌표 lon"+end_link.getStart_longitude()+"현재좌표 lat"+road_closers.get(j).getFinal_latitude()+"현재좌표 lon"+road_closers.get(j).getFinal_longitude());
+                if(((end_link.getStart_latitude()-shortest.getFinal_latitude())*(end_link.getStart_latitude()-shortest.getFinal_latitude())+(end_link.getStart_longitude()-shortest.getFinal_longitude())*(end_link.getStart_longitude()-shortest.getFinal_longitude()))>((end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())*(end_link.getStart_latitude()-road_closers.get(j).getFinal_latitude())+(end_link.getStart_longitude()-road_closers.get(j).getFinal_longitude())*(end_link.getStart_longitude()-road_closers.get(j).getFinal_longitude()))){
+
                     shortest=road_closers.get(j);
                     //System.out.println("반복중if내");
                 }
