@@ -64,7 +64,7 @@ public class MapActivity extends Activity{
         int flag = getIntent().getExtras().getInt("sd");
         searchpoint startP = new searchpoint(0,0);
         searchpoint destP = new searchpoint(0,0);
-        int count = 0;
+        int count = 2;
 
 
 
@@ -85,18 +85,18 @@ public class MapActivity extends Activity{
             @Override
             public void onClick(View view){
                 int m = 1;
-                int n = 1;
+                int n = 2;
                 /*if(flag != 2){
                     // 도착지와 출발지를 입력해 주세요. 오류 메세지.
                     Toast.makeText(MapActivity.this, "출발지와 도착지를 입력해 주세요", Toast.LENGTH_SHORT).show();
                 }
-                else*/for( m = 1; m < 35; m++){
-                    for( n = m+1; n < 35; n++){{
+                else*/
+                    {
                         int finalM = m;
                         tmapdata.findTitlePOI(SearchStartString, new TMapData.FindTitlePOIListenerCallback() {
                             @Override
                             public void onFindTitlePOI(ArrayList poiItem) {
-                                TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
+                                //TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
                                 TMapMarkerItem markerItem1 = new TMapMarkerItem();
                                 TMapPoint tMapPoint1 = new TMapPoint(0, 0);
                                 //startP.setLatitude(item.getPOIPoint().getLatitude());
@@ -112,7 +112,7 @@ public class MapActivity extends Activity{
                         tmapdata.findTitlePOI(SearchDestString, new TMapData.FindTitlePOIListenerCallback() {
                             @Override
                             public void onFindTitlePOI(ArrayList poiItem) {
-                                TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
+                                //TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
                                 TMapMarkerItem markerItem1 = new TMapMarkerItem();
 
                                 markerItem1.setPosition(0.5f, 1.0f);
@@ -191,8 +191,8 @@ public class MapActivity extends Activity{
                                 }
                                 tmapview.addTMapPolyLine("Line1", tMapPolyLine);
                                 tmapview.addTMapPolyLine("Line2", tMapPolyLineAstar);
-                                Thread.sleep(5000);
                             }
+                            n++;
 
 
 //            for(int i = 0; i < roadinfoArry.size(); i++) {
@@ -215,7 +215,7 @@ public class MapActivity extends Activity{
 
                     }
                 }
-            }}
+
         });
 
 
