@@ -95,8 +95,11 @@ public class MapActivity extends Activity{
                             TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
                             TMapMarkerItem markerItem1 = new TMapMarkerItem();
                             TMapPoint tMapPoint1 = new TMapPoint(0, 0);
-                            startP.setLatitude(item.getPOIPoint().getLatitude());
-                            startP.setLongitude(item.getPOIPoint().getLongitude());
+                            //startP.setLatitude(item.getPOIPoint().getLatitude());
+                            //startP.setLongitude(item.getPOIPoint().getLongitude());
+
+                            startP.setLatitude(37.515367);
+                            startP.setLongitude(127.035321);
 
                         }
                     });
@@ -110,8 +113,11 @@ public class MapActivity extends Activity{
                             markerItem1.setPosition(0.5f, 1.0f);
                             TMapPoint tMapPoint1 = new TMapPoint(0, 0);
 
-                            destP.setLatitude(item.getPOIPoint().getLatitude());
-                            destP.setLongitude(item.getPOIPoint().getLongitude());
+                            //destP.setLatitude(item.getPOIPoint().getLatitude());
+                            //destP.setLongitude(item.getPOIPoint().getLongitude());
+
+                            destP.setLatitude(37.516985);
+                            destP.setLongitude(127.051236);
 
                         }
                     });
