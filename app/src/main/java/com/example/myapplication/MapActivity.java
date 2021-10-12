@@ -54,6 +54,7 @@ public class MapActivity extends Activity{
 
         Button a_star=findViewById(R.id.a_star);
 
+
         Button Searchbtn = findViewById(R.id.Search_btn);
         String SearchString = getIntent().getExtras().getString("SearchText"),
                 SearchStartString = getIntent().getExtras().getString("SearchStartText"),
