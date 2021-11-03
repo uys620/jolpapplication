@@ -17,17 +17,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Title"
+            android:hint="장소를 검색하세요"
             android:textColor="@android:color/black"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
         <Button
             android:id="@+id/Search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
-            android:text="Search" />
+            android:text="Search"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -41,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Title"
+            android:hint="출발지"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -65,7 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Title"
+            android:hint="도착지"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -75,21 +77,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
-            android:text="도착지" />
-
-        <Button
-            android:id="@+id/roadSearch_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="길 검색" />
+            android:text="도착지"
+            />
 
         <Button
             android:id="@+id/a_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
-            android:text="A*으로 검색" />
+            android:text="검색하기" />
     </LinearLayout>
 
     <LinearLayout

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
 
@@ -12,7 +13,7 @@
       android:id="@+id/write_post"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_weight="10"
+      android:layout_gravity="top"
       android:text="글쓰기" />
 
   <androidx.recyclerview.widget.RecyclerView

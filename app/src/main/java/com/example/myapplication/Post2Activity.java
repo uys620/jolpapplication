@@ -181,7 +181,7 @@ public class Post2Activity extends AppCompatActivity {
 
         mTitle.setText(Title);
         mContents.setText(Contents);
-        mNickname.setText(nickname);
+        mNickname.setText("작성자:"+nickname);
 
         cDatas=new ArrayList<>();
         mStore.collection(FirebaseID.post)//파이어스토어에서 post로 되어있는 collectionreference 만들기
