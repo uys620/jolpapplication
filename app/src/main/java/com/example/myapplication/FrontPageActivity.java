@@ -37,6 +37,7 @@ public class FrontPageActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         break;
                     case R.id.market_board:
+                        startActivity(new Intent(getApplicationContext(),Market_board.class));
                         break;
                     case R.id.my_dm:
                         startActivity(new Intent(getApplicationContext(),My_DM.class));

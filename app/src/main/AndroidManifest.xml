@@ -4,6 +4,9 @@
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".MarketPostActivity"
+            android:launchMode="singleTop"></activity>
+
         <activity android:name=".My_Reply"
             android:launchMode="singleTop"></activity>
 
@@ -49,6 +55,9 @@
             android:launchMode="singleTop"/>
 
         <activity android:name=".signupActivity"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".Market_board"
             android:launchMode="singleTop"/>
 
         <activity android:name=".LoginActivity">
