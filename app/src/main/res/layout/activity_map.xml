@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
             android:text="Search"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="25dp"
             />
 
         <Button
