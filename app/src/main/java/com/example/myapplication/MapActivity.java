@@ -52,7 +52,7 @@ public class MapActivity extends Activity{
         EditText SearchDest = findViewById(R.id.SearchDest_text);
 
         Button a_star=findViewById(R.id.a_star);
-        Button roadSearchBtn=findViewById(R.id.roadSearchBtn);
+        Button roadSearchBtn=findViewById(R.id.roadSearch);
 
 
         Button Searchbtn = findViewById(R.id.Search_btn);
@@ -93,11 +93,8 @@ public class MapActivity extends Activity{
                             TMapPOIItem item = (TMapPOIItem) poiItem.get(0);
                             TMapMarkerItem markerItem1 = new TMapMarkerItem();
                             TMapPoint tMapPoint1 = new TMapPoint(0, 0);
-                            //startP.setLatitude(item.getPOIPoint().getLatitude());
-                            //startP.setLongitude(item.getPOIPoint().getLongitude());
-
-                            startP.setLatitude(37.515367);
-                            startP.setLongitude(127.035321);
+                            startP.setLatitude(item.getPOIPoint().getLatitude());
+                            startP.setLongitude(item.getPOIPoint().getLongitude());
 
                         }
                     });
@@ -111,11 +108,8 @@ public class MapActivity extends Activity{
                             markerItem1.setPosition(0.5f, 1.0f);
                             TMapPoint tMapPoint1 = new TMapPoint(0, 0);
 
-                            //destP.setLatitude(item.getPOIPoint().getLatitude());
-                            //destP.setLongitude(item.getPOIPoint().getLongitude());
-
-                            destP.setLatitude(37.516985);
-                            destP.setLongitude(127.051236);
+                            destP.setLatitude(item.getPOIPoint().getLatitude());
+                            destP.setLongitude(item.getPOIPoint().getLongitude());
 
                         }
                     });
@@ -135,30 +129,6 @@ public class MapActivity extends Activity{
                         //List<Integer> route = g.dijkstra(1,31);
                         //System.out.println(route.size() + ",");
 
-                        //Graph g= new Graph();
-                        a_star a=new a_star();
-                        //g.input(roadinfoArry);
-                        a.input(roadinfoArry);
-                        //System.out.println(startP.getMin_Value());
-                        //System.out.println("시작노드, 도착노드:" + startP.getMin_Value() + "," + destP.getMin_Value());
-                        //List<Integer> route = g.dijkstra(startP.getMin_Value(),destP.getMin_Value());
-                        int startid=a.nearid(startP);
-                        int destid=a.nearid(destP);
-                        System.out.println("시작링크 id "+startid);
-                        System.out.println("끝링크 id "+destid);
-                        List<roadinfo> routeAstar = a.a_star_algorhitm(roadinfoArry, startid,destid);
-
-                        //List<Integer> route = g.dijkstra(1,31);
-                        //System.out.println(route.size() + ",");
-
-                        ArrayList<TMapPoint> alTMapPointAstar = new ArrayList<TMapPoint>();
-                        for(int i = 0; i < routeAstar.size(); i++){
-                            //searchpoint s = new searchpoint(0,0);
-                            //System.out.println("받고자하는것:" + s.getX(route.get(i)) + "," + s.getY(route.get(i)));
-                            alTMapPointAstar.add( new TMapPoint(routeAstar.get(i).getStart_latitude(),routeAstar.get(i).getStart_longitude()));
-                        }
-
-
                         ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
                         for(int i = 0; i < route.size(); i++){
                             searchpoint s = new searchpoint(0,0);
@@ -172,18 +142,10 @@ public class MapActivity extends Activity{
                             tMapPolyLine.setLineColor(Color.BLUE);
                             tMapPolyLine.setLineWidth(2);
 
-                            TMapPolyLine tMapPolyLineAstar = new TMapPolyLine();
-                            tMapPolyLineAstar.setLineColor(Color.RED);
-                            tMapPolyLineAstar.setLineWidth(2);
-
                             for (int i = 0; i < alTMapPoint.size(); i++) {
                                 tMapPolyLine.addLinePoint(alTMapPoint.get(i));
                             }
-                            for (int i = 0; i < alTMapPointAstar.size(); i++) {
-                                tMapPolyLineAstar.addLinePoint(alTMapPointAstar.get(i));
-                            }
                             tmapview.addTMapPolyLine("Line1", tMapPolyLine);
-                            tmapview.addTMapPolyLine("Line2", tMapPolyLineAstar);
                         }
 
 
@@ -208,7 +170,6 @@ public class MapActivity extends Activity{
                 }
             }
         });
-
 
 
 

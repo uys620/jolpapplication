@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
-            android:text="Search"
+            android:layout_marginRight="28dp"
+            android:text="길검색"
             />
 
         <Button
@@ -36,14 +37,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
-            android:text="검색하기" />
+            android:layout_marginRight="28dp"
+            android:text="A*" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="97dp"
+            android:id="@+id/roadSearch"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Button" />
+            android:background="@android:color/holo_blue_light"
+            android:text="다익스트라" />
     </LinearLayout>
 
     <LinearLayout
